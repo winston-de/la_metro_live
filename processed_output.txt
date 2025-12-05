@@ -1,0 +1,13 @@
+{80301, {31, 32}},     // Redondo Beach
+{80302, {30, 33}},     // Douglas
+{80303, {29, 34}},     // El Segundo
+{80304, {28, 35}},     // Mariposa Station
+{80701, {27, 10}},     // Aviation / Century Station
+{80702, {26, 11}},     // LAX / Metro Transit Center
+{80703, {25, 12}},     // Westchester / Veterans
+{80704, {24, 13}},     // Downtown Inglewood
+{80705, {23, 14}},     // Fairview Heights
+{80706, {22, 15}},     // Hyde Park
+{80707, {21, 16}},     // Leimert Park
+{80708, {20, 17}},     // Martin Luther King Jr
+{80709, {19, 18}},     // Expo / Crenshaw K-Line
