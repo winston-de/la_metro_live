@@ -19,7 +19,9 @@ struct LineSim {
     MLine _line;
 };
 
-struct LineSim initialize_line(led_strip_handle_t led_strip, MLine line, uint8_t num_trains);
+struct LineSim initialize_line(led_strip_handle_t led_strip, MLine line, uint8_t num_trains, uint8_t start_offset);
 void simulate_update(struct LineSim *ls);
+
+void clear_all_stations(struct LineSim *ls);
 
 #endif

@@ -3,12 +3,12 @@ import os
 from typing import List, Optional
 
 # --- Configuration ---
-INPUT_FILE = '/Users/winstondejong/Downloads/Train mappings - E-Line.csv'
+INPUT_FILE = '/Users/winstondejong/Downloads/Train mappings - K-Line.csv'
 OUTPUT_FILE = 'processed_output.txt'
 # ---------------------
 
 def process_row(row: List[str]) -> Optional[str]:
-    return f"{{{row[1]}, {{{row[2]}, {row[3]}}}}},     // {row[0]}\n"
+    return f"{{{row[1]}, {{{row[3]}, {row[2]}}}}},     // {row[0]}\n"
 
 
 def process_csv_and_write_output(input_filepath: str, output_filepath: str) -> None:

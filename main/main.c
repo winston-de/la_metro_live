@@ -152,29 +152,29 @@ void simulator(void) {
 
 }
 
-const bool do_chase = 0;
+const bool do_chase = 1;
 
-struct LineSim a_sim;
-struct LineSim e_sim;
-struct LineSim b_sim;
-struct LineSim d_sim;
-struct LineSim c_sim;
-struct LineSim k_sim;
+struct LineSim sims[6];
+
+void refresh_all_lines(void) {
+    ESP_ERROR_CHECK(led_strip_refresh(ae_strip));
+    ESP_ERROR_CHECK(led_strip_refresh(bd_strip));
+    ESP_ERROR_CHECK(led_strip_refresh(ck_strip));
+}
+
+void run_on_all_sims(void (*f)(struct LineSim *)) {
+    for(int i = 0; i < ARRL(sims); i++) {
+        f(&sims[i]);
+    }
+} 
 
 
 void timer_callback(void *param)
 {
     if(do_chase) {chase();} else {
-        simulate_update(&e_sim);
-        simulate_update(&a_sim);
-        simulate_update(&b_sim);
-        simulate_update(&d_sim);
-        simulate_update(&c_sim);
-        simulate_update(&k_sim);
-        ESP_ERROR_CHECK(led_strip_refresh(ae_strip));
-        ESP_ERROR_CHECK(led_strip_refresh(bd_strip));
-        ESP_ERROR_CHECK(led_strip_refresh(ck_strip));
-
+        run_on_all_sims(clear_all_stations);
+        run_on_all_sims(simulate_update);
+        refresh_all_lines();
     }
 
 }
@@ -208,15 +208,13 @@ void app_main(void)
     if(do_chase) {
         chase_setup();
     } else {
-        e_sim = initialize_line(ae_strip, get_e_line(), 7);
-        a_sim = initialize_line(ae_strip, get_a_line(), 13);
-        b_sim = initialize_line(bd_strip, get_b_line(), 6);
-        d_sim = initialize_line(bd_strip, get_d_line(), 3);
-        c_sim = initialize_line(ck_strip, get_c_line(), 5);
-        k_sim = initialize_line(ck_strip, get_k_line(), 5);
-        ESP_ERROR_CHECK(led_strip_refresh(ae_strip));
-        ESP_ERROR_CHECK(led_strip_refresh(ck_strip));
-        ESP_ERROR_CHECK(led_strip_refresh(bd_strip));
+        sims[0] = initialize_line(ae_strip, get_a_line(), 23, 2);
+        sims[1] = initialize_line(ae_strip, get_e_line(), 9, 1);
+        sims[2] = initialize_line(bd_strip, get_b_line(), 6, 3);
+        sims[3] = initialize_line(bd_strip, get_d_line(), 3, 0);
+        sims[4] = initialize_line(ck_strip, get_c_line(), 7, 0);
+        sims[5] = initialize_line(ck_strip, get_k_line(), 6, 0);
+        refresh_all_lines();
     }
     // init_wifi();
     // set_all_leds(ae_strip, A_LED_VAL, AE_LEDS);

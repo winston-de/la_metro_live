@@ -128,60 +128,60 @@ static Station C_STOPS[] = {
 };
 
 static Station K_STOPS[] = {
-    {80301, {31, 32}},     // Redondo Beach
-    {80302, {30, 33}},     // Douglas
-    {80303, {29, 34}},     // El Segundo
-    {80304, {28, 35}},     // Mariposa Station
-    {80701, {27, 10}},     // Aviation / Century Station
-    {80702, {26, 11}},     // LAX / Metro Transit Center
-    {80703, {25, 12}},     // Westchester / Veterans
-    {80704, {24, 13}},     // Downtown Inglewood
-    {80705, {23, 14}},     // Fairview Heights
-    {80706, {22, 15}},     // Hyde Park
-    {80707, {21, 16}},     // Leimert Park
-    {80708, {20, 17}},     // Martin Luther King Jr
-    {80709, {19, 18}},     // Expo / Crenshaw K-Line
+    {80301, {32, 31}},     // Redondo Beach
+    {80302, {33, 30}},     // Douglas
+    {80303, {34, 29}},     // El Segundo
+    {80304, {35, 28}},     // Mariposa Station
+    {80701, {10, 27}},     // Aviation / Century Station
+    {80702, {11, 26}},     // LAX / Metro Transit Center
+    {80703, {12, 25}},     // Westchester / Veterans
+    {80704, {13, 24}},     // Downtown Inglewood
+    {80705, {14, 23}},     // Fairview Heights
+    {80706, {15, 22}},     // Hyde Park
+    {80707, {16, 21}},     // Leimert Park
+    {80708, {17, 20}},     // Martin Luther King Jr
+    {80709, {18, 19}},     // Expo / Crenshaw K-Line
 };
 
 MLine get_e_line()
 {
     MLine e_line = {
-        E_STOPS, 'E', E_LED_VAL
+        E_STOPS, 'E', ARRL(E_STOPS), E_LED_VAL
     };
     return e_line;
 }  
 
 MLine get_a_line() {
     MLine a_line = {
-        A_STOPS, 'A', A_LED_VAL
+        A_STOPS, 'A', ARRL(A_STOPS), A_LED_VAL
     };
     return a_line;
 }  
 
 MLine get_b_line() {
     MLine b_line = {
-        B_STOPS, 'B', B_LED_VAL
+        B_STOPS, 'B', ARRL(B_STOPS), B_LED_VAL
     };
     return b_line;
 }  
 
 MLine get_d_line() {
     MLine d_line = {
-        D_STOPS, 'D', D_LED_VAL
+        D_STOPS, 'D', ARRL(D_STOPS), D_LED_VAL
     };
     return d_line;
 }  
 
 MLine get_c_line() {
     MLine c_line = {
-        C_STOPS, 'C', C_LED_VAL
+        C_STOPS, 'C', ARRL(C_STOPS), C_LED_VAL
     };
     return c_line;
 }  
 
 MLine get_k_line() {
     MLine k_line = {
-        K_STOPS, 'K', K_LED_VAL
+        K_STOPS, 'K', ARRL(K_STOPS), K_LED_VAL
     };
 
     return k_line;

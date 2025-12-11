@@ -71,6 +71,8 @@ static esp_err_t led_strip_rmt_set_pixel_rgbw(led_strip_t *strip, uint32_t index
     return ESP_OK;
 }
 
+// static uint8_t led_strip_rmt_get_pixel_rgbw
+
 static esp_err_t led_strip_rmt_refresh(led_strip_t *strip)
 {
     led_strip_rmt_obj *rmt_strip = __containerof(strip, led_strip_rmt_obj, base);

@@ -13,6 +13,7 @@ typedef struct {
 typedef struct {
     Station* stations;
     char id;
+    uint8_t num_stations;
     uint8_t color_r;
     uint8_t color_g;
     uint8_t color_b;
