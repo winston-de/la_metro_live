@@ -1,0 +1,73 @@
+Name,ID,Dir1 node,Dir0 node
+Downtown Long Beach Station,80101,255,110
+Pacific Ave Station,80102,255,111
+Anaheim Street,80105,112,107
+Pacific Coast Hwy,80106,113,106
+Willow Street,80107,114,105
+Wardlow Station,80108,115,104
+Del Amo,80109,116,103
+Artesia,80110,117,102
+Compton,80111,118,101
+Willowbrook - Rosa Parks Station,80112,119,100
+103rd Street / Watts Towers,80113,120,99
+Firestone,80114,121,98
+Florence,80115,122,97
+Slauson,80116,123,96
+Vernon,80117,124,95
+Washington,80118,125,94
+San Pedro Street,80119,126,93
+Grand / LATTC,80120,127,92
+Pico,80121,128,57
+7th Street / Metro Center,80122,129,56
+LATTC / Ortho Institute,80123,91,58
+Jefferson / USC,80124,90,59
+Expo Park / USC ,80125,89,60
+Expo / Vermont,80126,88,61
+Expo / Western,80127,87,62
+Expo / Crenshaw,80128,86,63
+Farmdale,80129,85,64
+Expo / La Brea,80130,84,65
+La Cienega / Jefferson,80131,83,66
+Culver City,80132,82,67
+Palms,80133,81,68
+Westwood / Rancho Park,80134,80,69
+Expo / Sepulveda,80135,79,70
+Expo / Bundy,80136,78,71
+26th Street / Bergamot,80137,77,72
+17th Street / SMC,80138,76,73
+Downtown Santa Monica ,80139,75,74
+1st Street,80153,255,109
+5th Street Station,80154,255,108
+Atlantic Station,80401,139,0
+East LA Civic Center,80402,138,1
+Maravilla,80403,137,2
+Indiana,80404,136,3
+Soto,80405,135,4
+Mariachi Plaza,80406,134,5
+Pico / Aliso,80407,133,6
+Union Station,80409,7,52
+Chinatown,80410,8,51
+Lincoln / Cypress,80411,9,50
+Heritage Square,80412,10,49
+Southwest Museum,80413,11,48
+Highland Park,80414,12,47
+South Pasadena,80415,13,46
+Fillmore,80416,14,45
+Del Mar,80417,15,44
+Memorial Park,80418,16,43
+Lake,80419,17,42
+Allen,80420,18,41
+Sierra Madre Villa,80421,19,40
+Arcadia,80422,20,39
+Monrovia,80423,21,38
+Duarte / City of Hope,80424,22,37
+Irwindale,80425,23,36
+Azusa Downtown,80426,24,35
+APU / Citrus College Station,80427,25,34
+Grand Ave Arts / Bunker Hill,81401,130,55
+Historic Broadway,81402,131,54
+Little Tokyo / Arts District,81403,132,53
+Glendora,801100,26,33
+San Dimas Station,801101,27,32
+La Verne / Fairplex,801102,28,31
+Pomona North ,801103,29,30

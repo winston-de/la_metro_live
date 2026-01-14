@@ -3,7 +3,7 @@ import os
 from typing import List, Optional
 
 # --- Configuration ---
-INPUT_FILE = '/Users/winstondejong/Downloads/Train mappings - K-Line.csv'
+INPUT_FILE = '/Users/winstondejong/Projects/la_metro_live/mappings/Train mappings - Combined C_K.csv'
 OUTPUT_FILE = 'processed_output.txt'
 # ---------------------
 
