@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 #define ARRL(arr) sizeof(arr) / sizeof(arr[0])
 
@@ -18,6 +19,13 @@ typedef struct {
     uint8_t color_g;
     uint8_t color_b;
 } MLine;
+
+typedef struct {
+    int16_t routeId;
+    bool dir;
+    int16_t stopId; 
+
+} VehicleData;
 
 
 #endif

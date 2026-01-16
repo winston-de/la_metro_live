@@ -8,6 +8,7 @@
 #include "esp_mac.h"
 #include "esp_crt_bundle.h"
 #include "wifi_access.c"
+#include "https_helper.c"
 #include "esp_random.h"
 // #include "line_mapping.c"
 
@@ -181,6 +182,9 @@ void timer_callback(void *param)
 
 void app_main(void)
 {
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+
     lgnd_strip = configure_led_strip(26, LGND_LEDS);
     ae_strip = configure_led_strip(27, AE_LEDS);
     bd_strip = configure_led_strip(14, BD_LEDS);
@@ -198,6 +202,17 @@ void app_main(void)
 
     ESP_ERROR_CHECK(esp_timer_create(&my_timer_args, &timer_handler));
     ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, period));
+    init_wifi();
+    // https_with_url();
+
+    TaskHandle_t xHandle = NULL;
+    static uint8_t ucParameterToPass = 1;
+    BaseType_t xReturned = xTaskCreate(https_with_url, "NAME", 11000, &ucParameterToPass, tskIDLE_PRIORITY + 1, &xHandle);
+    if(xReturned == pdPASS) {
+        printf("task created\n");
+    } else {
+        printf("task failed\n");
+    }
 
     set_lgnd_colors();
     clear_all_leds(ae_strip);
