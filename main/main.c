@@ -133,7 +133,7 @@ void update_timer_callback(void *param)
 
     localtime_r(&now, &timeinfo);
 
-    if (timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour <= OFFTIME)
+    if (timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour < OFFTIME)
     {
         https_with_url();
         cleared = false;
