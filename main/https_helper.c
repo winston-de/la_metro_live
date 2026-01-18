@@ -9,13 +9,7 @@
 
 #include <string.h>
 #include <sys/param.h>
-// #include <stdlib.h>
-// #include <ctype.h>
 #include "esp_log.h"
-// #include "esp_event.h"
-// #include "esp_netif.h"
-// #include "protocol_examples_common.h"
-// #include "protocol_examples_utils.h"
 #include "esp_tls.h"
 #if CONFIG_MBEDTLS_CERTIFICATE_BUNDLE
 #include "esp_crt_bundle.h"
@@ -27,8 +21,9 @@
 #include "station.h"
 #include "esp_http_client.h"
 #include "justinjson.h"
+#include "trainmanager.h"
 
-#include "gtfs-realtime.pb-c.h"
+// #include "gtfs-realtime.pb-c.h"
 #include "secrets.h"
 
 #define MAX_HTTP_RECV_BUFFER 512
@@ -48,37 +43,6 @@ static const char *TAG_htt = "HTTP_CLIENT";
 
 extern const char howsmyssl_com_root_cert_pem_start[] asm("_binary_howsmyssl_com_root_cert_pem_start");
 extern const char howsmyssl_com_root_cert_pem_end[] asm("_binary_howsmyssl_com_root_cert_pem_end");
-
-void parse_train_data(uint8_t *buffer, size_t len)
-{
-    FeedMessage *m = feed_message__unpack(NULL, len, buffer);
-    if (m != NULL)
-    {
-        for (int i = 0; i < m->n_entity; i++)
-        {
-            VehiclePosition *v = m->entity[i]->vehicle;
-            if (v)
-            {
-                TripDescriptor *t = v->trip;
-                // bool dir = t->direction_id;
-                if (t)
-                {
-                    printf("Train: %s %s %d\n", t->route_id, v->stop_id, (int)t->direction_id);
-                }
-                else
-                {
-                    // printf("Invalid train info!\n");
-                }
-            }
-            else
-            {
-                // printf("Invalid vehicle!");
-            }
-        }
-    } else {
-        ESP_LOGE(TAG_htt, "Invalid entity data received");
-    }
-}
 
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {

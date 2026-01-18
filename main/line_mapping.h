@@ -11,11 +11,11 @@
 #define E_LED_VAL 17, 16, 0
 #define K_LED_VAL 17, 7, 8
 
-MLine get_e_line();
-MLine get_a_line();
-MLine get_b_line();
-MLine get_d_line();
-MLine get_c_line();
-MLine get_k_line();
+#define AE_STRIP_ID 1
+#define BD_STRIP_ID 2
+#define CK_STRIP_ID 3
+
+int get_all_lines(MLine **lines);
+int get_all_strips(LEDStrip **strips);
 
 #endif
