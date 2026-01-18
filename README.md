@@ -3,6 +3,8 @@
 ## Description
 A live version of the Los Angeles GoMetro map, printed directly on a PCB and using WS2812Cs (2020 package).
 
+https://github.com/user-attachments/assets/ebdb1551-d2c1-4a6d-937b-43f40449b2b8
+
 ## PCB Design
 The PCB is designed with several major features:
 - The main power input, and individual inputs to each set of LEDs have fuses that will blow at about 20% below the maximum current rating of the traces
