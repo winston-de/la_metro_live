@@ -1,6 +1,6 @@
 #include "trainmanager.h"
 #include "gtfs-realtime.pb-c.h"
-#include "station.h"
+#include "typedefs.h"
 #include "line_mapping.h"
 #include <string.h>
 #include <stdlib.h>

@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "station.h"
+#include "typedefs.h"
+#include "led_strip.h"
 
 #ifndef LED_HELPER_H
 #define LED_HELPER_H

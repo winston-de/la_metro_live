@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "station.h"
+#include "typedefs.h"
 
 #ifndef LINE_MAPPING_H
 #define LINE_MAPPING_H

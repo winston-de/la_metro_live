@@ -18,9 +18,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_system.h"
-#include "station.h"
+#include "typedefs.h"
 #include "esp_http_client.h"
-#include "justinjson.h"
 #include "trainmanager.h"
 
 // #include "gtfs-realtime.pb-c.h"
