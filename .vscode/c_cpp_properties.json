@@ -6,6 +6,7 @@
       "compileCommands": "${config:idf.buildPath}/compile_commands.json",
       "includePath": [
         "${config:idf.espIdfPath}/components/**",
+        // "${config:idf.espIdfPath}/components/protobuf-c/protobuf-c/protobuf-c",
         "${config:idf.espIdfPathWin}/components/**",
         "${workspaceFolder}/**",
         "${workspaceFolder}/build/config/*"

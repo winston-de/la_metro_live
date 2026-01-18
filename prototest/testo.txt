@@ -1,0 +1,1985 @@
+header {
+  gtfs_realtime_version: "2.0"
+  incrementality: FULL_DATASET
+  timestamp: 1768606902
+}
+entity {
+  id: "1010-1017-1044"
+  vehicle {
+    trip {
+      trip_id: "63383932"
+      start_time: "15:01:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0340691
+      longitude: -118.270508
+    }
+    current_stop_sequence: 18
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80121"
+    vehicle {
+      id: "1010-1017-1044"
+      label: "1010-1017-1044"
+    }
+  }
+}
+entity {
+  id: "1137-1142-1172"
+  vehicle {
+    trip {
+      trip_id: "63367585"
+      start_time: "15:26:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.8192558
+      longitude: -118.19558
+    }
+    current_stop_sequence: 6
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80108"
+    vehicle {
+      id: "1137-1142-1172"
+      label: "1137-1142-1172"
+    }
+  }
+}
+entity {
+  id: "1032-1035-1050"
+  vehicle {
+    trip {
+      trip_id: "63384050"
+      start_time: "14:52:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0278778
+      longitude: -118.388893
+    }
+    current_stop_sequence: 22
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80132"
+    vehicle {
+      id: "1032-1035-1050"
+      label: "1032-1035-1050"
+    }
+  }
+}
+entity {
+  id: "1030-1198"
+  vehicle {
+    trip {
+      trip_id: "63688506"
+      start_time: "15:14:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9283752
+      longitude: -118.386375
+    }
+    current_stop_sequence: 10
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80304"
+    vehicle {
+      id: "1030-1198"
+      label: "1030-1198"
+    }
+  }
+}
+entity {
+  id: "1008-1037-1043"
+  vehicle {
+    trip {
+      trip_id: "63384108"
+      start_time: "15:25:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0278778
+      longitude: -118.388893
+    }
+    current_stop_sequence: 8
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80132"
+    vehicle {
+      id: "1008-1037-1043"
+      label: "1008-1037-1043"
+    }
+  }
+}
+entity {
+  id: "533-534-543-544"
+  vehicle {
+    trip {
+      trip_id: "63621393"
+      start_time: "15:10:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0493164
+      longitude: -118.251259
+    }
+    current_stop_sequence: 12
+    current_status: STOPPED_AT
+    timestamp: 1768606897
+    stop_id: "80212"
+    vehicle {
+      id: "533-534-543-544"
+      label: "533-534-543-544"
+    }
+  }
+}
+entity {
+  id: "1086-1111-1129"
+  vehicle {
+    trip {
+      trip_id: "63367728"
+      start_time: "14:35:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0487
+      longitude: -118.239708
+    }
+    current_stop_sequence: 25
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606866
+    stop_id: "81402"
+    vehicle {
+      id: "1086-1111-1129"
+      label: "1086-1111-1129"
+    }
+  }
+}
+entity {
+  id: "1199-1206"
+  vehicle {
+    trip {
+      trip_id: "63688505"
+      start_time: "15:40:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.8948364
+      longitude: -118.369209
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80301"
+    vehicle {
+      id: "1199-1206"
+      label: "1199-1206"
+    }
+  }
+}
+entity {
+  id: "202-208-223"
+  vehicle {
+    trip {
+      trip_id: "63367655"
+      start_time: "14:59:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.1358376
+      longitude: -118.148102
+      speed: 0
+    }
+    current_stop_sequence: 16
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80416"
+    vehicle {
+      id: "202-208-223"
+      label: "202-208-223"
+    }
+  }
+}
+entity {
+  id: "1139-1168-1182"
+  vehicle {
+    trip {
+      trip_id: "63367777"
+      start_time: "15:34:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.7880402
+      longitude: -118.189354
+    }
+    current_stop_sequence: 3
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80105"
+    vehicle {
+      id: "1139-1168-1182"
+      label: "1139-1168-1182"
+    }
+  }
+}
+entity {
+  id: "1057-1067-1083"
+  vehicle {
+    trip {
+      trip_id: "63384136"
+      start_time: "15:40:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0334167
+      longitude: -118.155785
+    }
+    current_stop_sequence: 2
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80402"
+    vehicle {
+      id: "1057-1067-1083"
+      label: "1057-1067-1083"
+    }
+  }
+}
+entity {
+  id: "1003-1046-1186"
+  vehicle {
+    trip {
+      trip_id: "63383918"
+      start_time: "15:24:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0526199
+      longitude: -118.246979
+    }
+    current_stop_sequence: 10
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "81401"
+    vehicle {
+      id: "1003-1046-1186"
+      label: "1003-1046-1186"
+    }
+  }
+}
+entity {
+  id: "1123-1151-1166"
+  vehicle {
+    trip {
+      trip_id: "63367635"
+      start_time: "15:07:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.152504
+      longitude: -118.10424
+    }
+    current_stop_sequence: 12
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606866
+    stop_id: "80420"
+    vehicle {
+      id: "1123-1151-1166"
+      label: "1123-1151-1166"
+    }
+  }
+}
+entity {
+  id: "1059-1073-1081"
+  vehicle {
+    trip {
+      trip_id: "63383919"
+      start_time: "15:48:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0333939
+      longitude: -118.154465
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80401"
+    vehicle {
+      id: "1059-1073-1081"
+      label: "1059-1073-1081"
+    }
+  }
+}
+entity {
+  id: "1189-1202"
+  vehicle {
+    trip {
+      trip_id: "63688503"
+      start_time: "15:34:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9943
+      longitude: -118.330811
+    }
+    current_stop_sequence: 4
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606855
+    stop_id: "80706"
+    vehicle {
+      id: "1189-1202"
+      label: "1189-1202"
+    }
+  }
+}
+entity {
+  id: "1134-1170-1175"
+  vehicle {
+    trip {
+      trip_id: "63367634"
+      start_time: "14:11:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9925842
+      longitude: -118.243431
+      speed: 0
+    }
+    current_stop_sequence: 33
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606812
+    stop_id: "80116"
+    vehicle {
+      id: "1134-1170-1175"
+      label: "1134-1170-1175"
+    }
+  }
+}
+entity {
+  id: "559-560-601-602"
+  vehicle {
+    trip {
+      trip_id: "63621447"
+      start_time: "15:39:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0543213
+      longitude: -118.246613
+    }
+    current_stop_sequence: 3
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80212"
+    vehicle {
+      id: "559-560-601-602"
+      label: "559-560-601-602"
+    }
+  }
+}
+entity {
+  id: "1070-1082-1088"
+  vehicle {
+    trip {
+      trip_id: "63383953"
+      start_time: "15:33:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0295525
+      longitude: -118.463478
+    }
+    current_stop_sequence: 4
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80136"
+    vehicle {
+      id: "1070-1082-1088"
+      label: "1070-1082-1088"
+    }
+  }
+}
+entity {
+  id: "702"
+  vehicle {
+    trip {
+      trip_id: "63688507"
+      start_time: "15:24:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9623489
+      longitude: -118.373665
+    }
+    current_stop_sequence: 7
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606855
+    stop_id: "80703"
+    vehicle {
+      id: "702"
+      label: "702"
+    }
+  }
+}
+entity {
+  id: "204-226-242"
+  vehicle {
+    trip {
+      trip_id: "63367659"
+      start_time: "15:42:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.768
+      longitude: -118.192924
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80101"
+    vehicle {
+      id: "204-226-242"
+      label: "204-226-242"
+    }
+  }
+}
+entity {
+  id: "1100-1107-1133"
+  vehicle {
+    trip {
+      trip_id: "63367583"
+      start_time: "14:22:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1115341
+      longitude: -118.172379
+      speed: 0
+    }
+    current_stop_sequence: 30
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80415"
+    vehicle {
+      id: "1100-1107-1133"
+      label: "1100-1107-1133"
+    }
+  }
+}
+entity {
+  id: "206-233-235"
+  vehicle {
+    trip {
+      trip_id: "63367632"
+      start_time: "13:39:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.7889862
+      longitude: -118.1894
+    }
+    current_stop_sequence: 43
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80106"
+    vehicle {
+      id: "206-233-235"
+      label: "206-233-235"
+    }
+  }
+}
+entity {
+  id: "158"
+  vehicle {
+    trip {
+      trip_id: "63367639"
+      start_time: "15:15:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.1328659
+      longitude: -118.002342
+      speed: 0
+    }
+    current_stop_sequence: 9
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80423"
+    vehicle {
+      id: "158"
+      label: "158"
+    }
+  }
+}
+entity {
+  id: "1065-1089-1092"
+  vehicle {
+    trip {
+      trip_id: "63384017"
+      start_time: "14:53:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0529022
+      longitude: -118.247421
+    }
+    current_stop_sequence: 21
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "81402"
+    vehicle {
+      id: "1065-1089-1092"
+      label: "1065-1089-1092"
+    }
+  }
+}
+entity {
+  id: "159"
+  vehicle {
+    trip {
+      trip_id: "63367660"
+      start_time: "15:31:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0940742
+      longitude: -117.752312
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606663
+    stop_id: "801103"
+    vehicle {
+      id: "159"
+      label: "159"
+    }
+  }
+}
+entity {
+  id: "1193-1205"
+  vehicle {
+    trip {
+      trip_id: "63688516"
+      start_time: "15:44:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0220222
+      longitude: -118.334839
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80709"
+    vehicle {
+      id: "1193-1205"
+      label: "1193-1205"
+    }
+  }
+}
+entity {
+  id: "1039-1041-1049"
+  vehicle {
+    trip {
+      trip_id: "63384134"
+      start_time: "15:08:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0182648
+      longitude: -118.295868
+    }
+    current_stop_sequence: 17
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606825
+    stop_id: "80127"
+    vehicle {
+      id: "1039-1041-1049"
+      label: "1039-1041-1049"
+    }
+  }
+}
+entity {
+  id: "164"
+  vehicle {
+    trip {
+      trip_id: "63367803"
+      start_time: "14:06:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.151844
+      longitude: -118.132698
+      speed: 0
+    }
+    current_stop_sequence: 34
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606872
+    stop_id: "80419"
+    vehicle {
+      id: "164"
+      label: "164"
+    }
+  }
+}
+entity {
+  id: "1058-1074-1094"
+  vehicle {
+    trip {
+      trip_id: "63384152"
+      start_time: "15:49:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0137253
+      longitude: -118.491692
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80139"
+    vehicle {
+      id: "1058-1074-1094"
+      label: "1058-1074-1094"
+    }
+  }
+}
+entity {
+  id: "167"
+  vehicle {
+    trip {
+      trip_id: "63367586"
+      start_time: "15:50:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.768
+      longitude: -118.192924
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80101"
+    vehicle {
+      id: "167"
+      label: "167"
+    }
+  }
+}
+entity {
+  id: "1144-1164-1184"
+  vehicle {
+    trip {
+      trip_id: "63367628"
+      start_time: "13:47:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.8367119
+      longitude: -118.206139
+      speed: 0
+    }
+    current_stop_sequence: 41
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80108"
+    vehicle {
+      id: "1144-1164-1184"
+      label: "1144-1164-1184"
+    }
+  }
+}
+entity {
+  id: "1015-1019-1215"
+  vehicle {
+    trip {
+      trip_id: "63383980"
+      start_time: "15:00:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0255775
+      longitude: -118.363098
+    }
+    current_stop_sequence: 21
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80131"
+    vehicle {
+      id: "1015-1019-1215"
+      label: "1015-1019-1215"
+    }
+  }
+}
+entity {
+  id: "539-540-589-590"
+  vehicle {
+    trip {
+      trip_id: "63621395"
+      start_time: "15:34:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1067085
+      longitude: -118.350075
+    }
+    current_stop_sequence: 3
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80203"
+    vehicle {
+      id: "539-540-589-590"
+      label: "539-540-589-590"
+    }
+  }
+}
+entity {
+  id: "1103-1131-1132"
+  vehicle {
+    trip {
+      trip_id: "63367761"
+      start_time: "14:43:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.070755
+      longitude: -118.228577
+      speed: 0
+    }
+    current_stop_sequence: 22
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606872
+    stop_id: "80410"
+    vehicle {
+      id: "1103-1131-1132"
+      label: "1103-1131-1132"
+    }
+  }
+}
+entity {
+  id: "219-302"
+  vehicle {
+    trip {
+      trip_id: "63367760"
+      start_time: "14:19:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0409966
+      longitude: -118.265869
+    }
+    current_stop_sequence: 28
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80121"
+    vehicle {
+      id: "219-302"
+      label: "219-302"
+    }
+  }
+}
+entity {
+  id: "732-747"
+  vehicle {
+    trip {
+      trip_id: "63367775"
+      start_time: "14:14:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1303291
+      longitude: -118.148048
+      speed: 0
+    }
+    current_stop_sequence: 31
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80416"
+    vehicle {
+      id: "732-747"
+      label: "732-747"
+    }
+  }
+}
+entity {
+  id: "1023-1224"
+  vehicle {
+    trip {
+      trip_id: "63688371"
+      start_time: "15:41:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9489822
+      longitude: -118.378738
+    }
+    current_stop_sequence: 2
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606855
+    stop_id: "80701"
+    vehicle {
+      id: "1023-1224"
+      label: "1023-1224"
+    }
+  }
+}
+entity {
+  id: "1009-1048-1212"
+  vehicle {
+    trip {
+      trip_id: "63384085"
+      start_time: "15:41:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0161133
+      longitude: -118.489143
+    }
+    current_stop_sequence: 2
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80138"
+    vehicle {
+      id: "1009-1048-1212"
+      label: "1009-1048-1212"
+    }
+  }
+}
+entity {
+  id: "1196-1197"
+  vehicle {
+    trip {
+      trip_id: "63688502"
+      start_time: "15:20:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.9584923
+      longitude: -118.378479
+    }
+    current_stop_sequence: 7
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80703"
+    vehicle {
+      id: "1196-1197"
+      label: "1196-1197"
+    }
+  }
+}
+entity {
+  id: "1101-1126-1128"
+  vehicle {
+    trip {
+      trip_id: "63367630"
+      start_time: "13:55:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.8979225
+      longitude: -118.224258
+    }
+    current_stop_sequence: 38
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80111"
+    vehicle {
+      id: "1101-1126-1128"
+      label: "1101-1126-1128"
+    }
+  }
+}
+entity {
+  id: "1102-1109-1113"
+  vehicle {
+    trip {
+      trip_id: "63367654"
+      start_time: "15:10:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.931797
+      longitude: -118.239441
+      speed: 0
+    }
+    current_stop_sequence: 11
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606872
+    stop_id: "80113"
+    vehicle {
+      id: "1102-1109-1113"
+      label: "1102-1109-1113"
+    }
+  }
+}
+entity {
+  id: "1099-1108-1120"
+  vehicle {
+    trip {
+      trip_id: "63367631"
+      start_time: "14:03:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9432144
+      longitude: -118.243279
+      speed: 0
+    }
+    current_stop_sequence: 36
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606872
+    stop_id: "80113"
+    vehicle {
+      id: "1099-1108-1120"
+      label: "1099-1108-1120"
+    }
+  }
+}
+entity {
+  id: "567-568-583-584"
+  vehicle {
+    trip {
+      trip_id: "63621506"
+      start_time: "15:21:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "805"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0620079
+      longitude: -118.297722
+    }
+    current_stop_sequence: 7
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606706
+    stop_id: "80215"
+    vehicle {
+      id: "567-568-583-584"
+      label: "567-568-583-584"
+    }
+  }
+}
+entity {
+  id: "4013-4014-4017-4018"
+  vehicle {
+    trip {
+      trip_id: "63621449"
+      start_time: "15:15:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.1015701
+      longitude: -118.344261
+    }
+    current_stop_sequence: 13
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80202"
+    vehicle {
+      id: "4013-4014-4017-4018"
+      label: "4013-4014-4017-4018"
+    }
+  }
+}
+entity {
+  id: "1190-1195"
+  vehicle {
+    trip {
+      trip_id: "63688504"
+      start_time: "15:30:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.9233551
+      longitude: -118.387535
+    }
+    current_stop_sequence: 4
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80304"
+    vehicle {
+      id: "1190-1195"
+      label: "1190-1195"
+    }
+  }
+}
+entity {
+  id: "209-240"
+  vehicle {
+    trip {
+      trip_id: "63367580"
+      start_time: "14:38:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0486679
+      longitude: -118.258766
+    }
+    current_stop_sequence: 20
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80122"
+    vehicle {
+      id: "209-240"
+      label: "209-240"
+    }
+  }
+}
+entity {
+  id: "545-546-577-578"
+  vehicle {
+    trip {
+      trip_id: "63621394"
+      start_time: "15:22:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0977097
+      longitude: -118.291756
+      speed: 0
+    }
+    current_stop_sequence: 6
+    current_status: STOPPED_AT
+    timestamp: 1768606897
+    stop_id: "80206"
+    vehicle {
+      id: "545-546-577-578"
+      label: "545-546-577-578"
+    }
+  }
+}
+entity {
+  id: "1095-1119-1127"
+  vehicle {
+    trip {
+      trip_id: "63367581"
+      start_time: "14:46:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0299377
+      longitude: -118.261978
+    }
+    current_stop_sequence: 18
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80120"
+    vehicle {
+      id: "1095-1119-1127"
+      label: "1095-1119-1127"
+    }
+  }
+}
+entity {
+  id: "1230-1233"
+  vehicle {
+    trip {
+      trip_id: "63688246"
+      start_time: "15:31:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9280777
+      longitude: -118.341354
+    }
+    current_stop_sequence: 5
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80307"
+    vehicle {
+      id: "1230-1233"
+      label: "1230-1233"
+    }
+  }
+}
+entity {
+  id: "1140-1149-1165"
+  vehicle {
+    trip {
+      trip_id: "63367721"
+      start_time: "15:02:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.9459534
+      longitude: -118.243156
+    }
+    current_stop_sequence: 12
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606866
+    stop_id: "80114"
+    vehicle {
+      id: "1140-1149-1165"
+      label: "1140-1149-1165"
+    }
+  }
+}
+entity {
+  id: "1027-1217"
+  vehicle {
+    trip {
+      trip_id: "63688286"
+      start_time: "15:25:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.932682
+      longitude: -118.378761
+    }
+    current_stop_sequence: 8
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606874
+    stop_id: "80701"
+    vehicle {
+      id: "1027-1217"
+      label: "1027-1217"
+    }
+  }
+}
+entity {
+  id: "573-574-599-600"
+  vehicle {
+    trip {
+      trip_id: "63621507"
+      start_time: "15:33:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "805"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0545807
+      longitude: -118.270706
+    }
+    current_stop_sequence: 5
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80210"
+    vehicle {
+      id: "573-574-599-600"
+      label: "573-574-599-600"
+    }
+  }
+}
+entity {
+  id: "408"
+  vehicle {
+    trip {
+      trip_id: "63384039"
+      start_time: "15:16:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0472336
+      longitude: -118.260048
+    }
+    current_stop_sequence: 12
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80121"
+    vehicle {
+      id: "408"
+      label: "408"
+    }
+  }
+}
+entity {
+  id: "1125-1162-1171"
+  vehicle {
+    trip {
+      trip_id: "63367576"
+      start_time: "13:50:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1309
+      longitude: -117.947723
+    }
+    current_stop_sequence: 40
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606885
+    stop_id: "80425"
+    vehicle {
+      id: "1125-1162-1171"
+      label: "1125-1162-1171"
+    }
+  }
+}
+entity {
+  id: "1033-1040-1210"
+  vehicle {
+    trip {
+      trip_id: "63384151"
+      start_time: "15:09:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0182457
+      longitude: -118.290985
+    }
+    current_stop_sequence: 15
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80125"
+    vehicle {
+      id: "1033-1040-1210"
+      label: "1033-1040-1210"
+    }
+  }
+}
+entity {
+  id: "1062-1077-1091"
+  vehicle {
+    trip {
+      trip_id: "63383975"
+      start_time: "15:17:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0223045
+      longitude: -118.333847
+    }
+    current_stop_sequence: 13
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80127"
+    vehicle {
+      id: "1062-1077-1091"
+      label: "1062-1077-1091"
+    }
+  }
+}
+entity {
+  id: "201-237"
+  vehicle {
+    trip {
+      trip_id: "63367589"
+      start_time: "15:18:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.8979225
+      longitude: -118.224258
+    }
+    current_stop_sequence: 9
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80111"
+    vehicle {
+      id: "201-237"
+      label: "201-237"
+    }
+  }
+}
+entity {
+  id: "1112-1130-1179"
+  vehicle {
+    trip {
+      trip_id: "63367759"
+      start_time: "15:23:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.1289864
+      longitude: -117.933167
+      speed: 0
+    }
+    current_stop_sequence: 8
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80424"
+    vehicle {
+      id: "1112-1130-1179"
+      label: "1112-1130-1179"
+    }
+  }
+}
+entity {
+  id: "704-737-739"
+  vehicle {
+    position {
+      latitude: 33.7889862
+      longitude: -118.1894
+    }
+    timestamp: 1768606845
+    vehicle {
+      id: "704-737-739"
+      label: "704-737-739"
+    }
+  }
+}
+entity {
+  id: "1222-1235"
+  vehicle {
+    trip {
+      trip_id: "63688375"
+      start_time: "15:21:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9287529
+      longitude: -118.242874
+    }
+    current_stop_sequence: 9
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80311"
+    vehicle {
+      id: "1222-1235"
+      label: "1222-1235"
+    }
+  }
+}
+entity {
+  id: "513-514-517-518"
+  vehicle {
+    trip {
+      trip_id: "63621396"
+      start_time: "15:46:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1685028
+      longitude: -118.376808
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606897
+    stop_id: "80201"
+    vehicle {
+      id: "513-514-517-518"
+      label: "513-514-517-518"
+    }
+  }
+}
+entity {
+  id: "1014-1053-1229"
+  vehicle {
+    trip {
+      trip_id: "63383931"
+      start_time: "14:37:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0333519
+      longitude: -118.163803
+    }
+    current_stop_sequence: 28
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606875
+    stop_id: "80402"
+    vehicle {
+      id: "1014-1053-1229"
+      label: "1014-1053-1229"
+    }
+  }
+}
+entity {
+  id: "1218-1231"
+  vehicle {
+    trip {
+      trip_id: "63688224"
+      start_time: "15:24:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.9274979
+      longitude: -118.26516
+    }
+    current_stop_sequence: 5
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "80310"
+    vehicle {
+      id: "1218-1231"
+      label: "1218-1231"
+    }
+  }
+}
+entity {
+  id: "1066-1069-1084"
+  vehicle {
+    trip {
+      trip_id: "63384067"
+      start_time: "14:36:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.02145
+      longitude: -118.482559
+    }
+    current_stop_sequence: 29
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606774
+    stop_id: "80139"
+    vehicle {
+      id: "1066-1069-1084"
+      label: "1066-1069-1084"
+    }
+  }
+}
+entity {
+  id: "213-250"
+  vehicle {
+    trip {
+      trip_id: "63367802"
+      start_time: "13:58:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1367607
+      longitude: -118.016579
+      speed: 0
+    }
+    current_stop_sequence: 38
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80423"
+    vehicle {
+      id: "213-250"
+      label: "213-250"
+    }
+  }
+}
+entity {
+  id: "1138-1178-1181"
+  vehicle {
+    trip {
+      trip_id: "63367579"
+      start_time: "13:42:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.1370354
+      longitude: -117.889908
+    }
+    current_stop_sequence: 43
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606804
+    stop_id: "801100"
+    vehicle {
+      id: "1138-1178-1181"
+      label: "1138-1178-1181"
+    }
+  }
+}
+entity {
+  id: "1136-1159-1160"
+  vehicle {
+    trip {
+      trip_id: "63367719"
+      start_time: "14:30:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0833282
+      longitude: -118.217278
+      speed: 0
+    }
+    current_stop_sequence: 27
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606872
+    stop_id: "80412"
+    vehicle {
+      id: "1136-1159-1160"
+      label: "1136-1159-1160"
+    }
+  }
+}
+entity {
+  id: "535-536-547-548"
+  vehicle {
+    trip {
+      trip_id: "63621559"
+      start_time: "15:34:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "805"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0616264
+      longitude: -118.284
+    }
+    current_stop_sequence: 4
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80210"
+    vehicle {
+      id: "535-536-547-548"
+      label: "535-536-547-548"
+    }
+  }
+}
+entity {
+  id: "1188-1207"
+  vehicle {
+    trip {
+      trip_id: "63688510"
+      start_time: "15:10:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "807"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.9887466
+      longitude: -118.330849
+    }
+    current_stop_sequence: 11
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606814
+    stop_id: "80707"
+    vehicle {
+      id: "1188-1207"
+      label: "1188-1207"
+    }
+  }
+}
+entity {
+  id: "1001-1031-1038"
+  vehicle {
+    trip {
+      trip_id: "63383994"
+      start_time: "15:32:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0333214
+      longitude: -118.183479
+    }
+    current_stop_sequence: 4
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80404"
+    vehicle {
+      id: "1001-1031-1038"
+      label: "1001-1031-1038"
+    }
+  }
+}
+entity {
+  id: "1055-1226"
+  vehicle {
+    trip {
+      trip_id: "63688318"
+      start_time: "15:44:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 0
+    }
+    position {
+      latitude: 33.9140282
+      longitude: -118.104591
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606894
+    stop_id: "80314"
+    vehicle {
+      id: "1055-1226"
+      label: "1055-1226"
+    }
+  }
+}
+entity {
+  id: "1016-1225"
+  vehicle {
+    trip {
+      trip_id: "63688356"
+      start_time: "15:11:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "803"
+      direction_id: 1
+    }
+    position {
+      latitude: 33.9182472
+      longitude: -118.19474
+    }
+    current_stop_sequence: 11
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80313"
+    vehicle {
+      id: "1016-1225"
+      label: "1016-1225"
+    }
+  }
+}
+entity {
+  id: "455"
+  vehicle {
+    trip {
+      trip_id: "63384008"
+      start_time: "14:45:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0362473
+      longitude: -118.193024
+    }
+    current_stop_sequence: 26
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606866
+    stop_id: "80404"
+    vehicle {
+      id: "455"
+      label: "455"
+    }
+  }
+}
+entity {
+  id: "563-564-587-588"
+  vehicle {
+    trip {
+      trip_id: "63621450"
+      start_time: "15:27:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "802"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0765266
+      longitude: -118.291687
+    }
+    current_stop_sequence: 7
+    current_status: STOPPED_AT
+    timestamp: 1768606897
+    stop_id: "80208"
+    vehicle {
+      id: "563-564-587-588"
+      label: "563-564-587-588"
+    }
+  }
+}
+entity {
+  id: "508-509-515-516"
+  vehicle {
+    trip {
+      trip_id: "63621508"
+      start_time: "15:45:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "805"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0562
+      longitude: -118.234245
+      speed: 0
+    }
+    current_stop_sequence: 1
+    current_status: STOPPED_AT
+    timestamp: 1768606897
+    stop_id: "80214"
+    vehicle {
+      id: "508-509-515-516"
+      label: "508-509-515-516"
+    }
+  }
+}
+entity {
+  id: "1147-1150-1173"
+  vehicle {
+    trip {
+      trip_id: "63367638"
+      start_time: "14:51:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.1086845
+      longitude: -118.197601
+      speed: 0
+    }
+    current_stop_sequence: 19
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606892
+    stop_id: "80413"
+    vehicle {
+      id: "1147-1150-1173"
+      label: "1147-1150-1173"
+    }
+  }
+}
+entity {
+  id: "460"
+  vehicle {
+    trip {
+      trip_id: "63384097"
+      start_time: "14:44:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "804"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.034874
+      longitude: -118.437492
+    }
+    current_stop_sequence: 26
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606895
+    stop_id: "80136"
+    vehicle {
+      id: "460"
+      label: "460"
+    }
+  }
+}
+entity {
+  id: "1135-1157-1167"
+  vehicle {
+    trip {
+      trip_id: "63367724"
+      start_time: "14:27:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 1
+    }
+    position {
+      latitude: 34.0547295
+      longitude: -118.251724
+    }
+    current_stop_sequence: 26
+    current_status: STOPPED_AT
+    timestamp: 1768606895
+    stop_id: "81401"
+    vehicle {
+      id: "1135-1157-1167"
+      label: "1135-1157-1167"
+    }
+  }
+}
+entity {
+  id: "107"
+  vehicle {
+    trip {
+      trip_id: "63367776"
+      start_time: "14:54:00"
+      start_date: "20260116"
+      schedule_relationship: SCHEDULED
+      route_id: "801"
+      direction_id: 0
+    }
+    position {
+      latitude: 34.0254936
+      longitude: -118.2528
+    }
+    current_stop_sequence: 17
+    current_status: IN_TRANSIT_TO
+    timestamp: 1768606866
+    stop_id: "80119"
+    vehicle {
+      id: "107"
+      label: "107"
+    }
+  }
+}

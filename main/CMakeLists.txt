@@ -1,2 +1,2 @@
-idf_component_register(SRCS "https_helper.c" "wifi_access.c" "main.c" "line_mapping.c" "simulator.c" "station.h" "justinjson.c" "justinjson.h"
+idf_component_register(SRCS "https_helper.c" "wifi_access.c" "main.c" "line_mapping.c" "simulator.c" "station.h" "justinjson.c" "justinjson.h" "gtfs-realtime.pb-c.c" "gtfs-realtime.pb-c.h"
                     INCLUDE_DIRS ".")

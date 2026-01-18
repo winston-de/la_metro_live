@@ -24,11 +24,11 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_system.h"
-
 #include "station.h"
 #include "esp_http_client.h"
-
 #include "justinjson.h"
+
+#include "gtfs-realtime.pb-c.h"
 
 #define MAX_HTTP_RECV_BUFFER 512
 #define MAX_HTTP_OUTPUT_BUFFER 2048
@@ -44,13 +44,50 @@ static const char *TAG_htt = "HTTP_CLIENT";
    To embed it in the app binary, the PEM file is named
    in the component.mk COMPONENT_EMBED_TXTFILES variable.
 */
+
 extern const char howsmyssl_com_root_cert_pem_start[] asm("_binary_howsmyssl_com_root_cert_pem_start");
 extern const char howsmyssl_com_root_cert_pem_end[] asm("_binary_howsmyssl_com_root_cert_pem_end");
+
+void do_stuff(uint8_t *buffer, size_t len)
+{
+    printf("Doing the stuff\n");
+    FeedMessage *m = feed_message__unpack(NULL, len, buffer);
+    if (m != NULL)
+    {
+        printf("Blah %ld\n", (long int)m->header->timestamp);
+
+        for (int i = 0; i < m->n_entity; i++)
+        {
+            VehiclePosition *v = m->entity[i]->vehicle;
+            if (v)
+            {
+                printf("V pointers: %p\n", v);
+                TripDescriptor *t = v->trip;
+                // bool dir = t->direction_id;
+                printf("T pointers: %p\n", t);
+                if (t)
+                {
+                    printf("Train: %s %s %d\n", t->route_id, v->stop_id, (int)t->direction_id);
+                }
+                else
+                {
+                    printf("Invalid train info!\n");
+                }
+                // int route = strtol(t->route_id);
+                // int stop = strtol(t->route_id);
+            } else {
+                printf("Invalid vehicle!");
+            }
+        }
+    }
+    // printf("pointer %p", response_buffer);
+}
 
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {
     static char *output_buffer; // Buffer to store response of http request from event handler
     static int output_len;      // Stores number of bytes read
+    static int content_len;
     switch (evt->event_id)
     {
     case HTTP_EVENT_ERROR:
@@ -68,7 +105,7 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
     case HTTP_EVENT_ON_DATA:
         ESP_LOGD(TAG_htt, "HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
         // Clean the buffer in case of a new request
-        ESP_LOGD("Arrr", "arrr we made it here");
+        printf("arrr we made it here\n");
 
         if (output_len == 0 && evt->user_data)
         {
@@ -85,6 +122,7 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
             int copy_len = 0;
             if (evt->user_data)
             {
+                // should not be in use
                 // The last byte in evt->user_data is kept for the NULL character in case of out-of-bound access.
                 copy_len = MIN(evt->data_len, (MAX_HTTP_OUTPUT_BUFFER - output_len));
                 if (copy_len)
@@ -94,11 +132,14 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
             }
             else
             {
-                int content_len = esp_http_client_get_content_length(evt->client);
+                content_len = esp_http_client_get_content_length(evt->client);
                 if (output_buffer == NULL)
                 {
+                    // printf("buffer here of len %d\n", content_len);
                     // We initialize output_buffer with 0 because it is used by strlen() and similar functions therefore should be null terminated.
                     output_buffer = (char *)calloc(content_len + 1, sizeof(char));
+                    printf("content len: %d\n", content_len);
+
                     output_len = 0;
                     if (output_buffer == NULL)
                     {
@@ -107,23 +148,25 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
                     }
                 }
                 copy_len = MIN(evt->data_len, (content_len - output_len));
+                printf("data len: %d\n", copy_len);
                 if (copy_len)
                 {
                     memcpy(output_buffer + output_len, evt->data, copy_len);
                 }
             }
             output_len += copy_len;
+            printf("output len: %d\n", copy_len);
         }
 
         break;
     case HTTP_EVENT_ON_FINISH:
-        ESP_LOGD(TAG_htt, "HTTP_EVENT_ON_FINISH");
-        if (output_buffer != NULL)
-        {
-            free(output_buffer);
-            output_buffer = NULL;
-        }
-        output_len = 0;
+        // ESP_LOGD(TAG_htt, "HTTP_EVENT_ON_FINISH");
+        // if (output_buffer != NULL)
+        // {
+        //     free(output_buffer);
+        //     output_buffer = NULL;
+        // }
+        // output_len = 0;
         break;
     case HTTP_EVENT_DISCONNECTED:
         ESP_LOGI(TAG_htt, "HTTP_EVENT_DISCONNECTED");
@@ -134,18 +177,17 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
             ESP_LOGI(TAG_htt, "Last esp error code: 0x%x", err);
             ESP_LOGI(TAG_htt, "Last mbedtls failure: 0x%x", mbedtls_err);
         }
+        printf("Pointer %p length %d\n", output_buffer, content_len);
         if (output_buffer != NULL)
         {
+            do_stuff((uint8_t *)output_buffer, content_len);
             free(output_buffer);
             output_buffer = NULL;
         }
         output_len = 0;
         break;
+        
     case HTTP_EVENT_REDIRECT:
-        ESP_LOGD(TAG_htt, "HTTP_EVENT_REDIRECT");
-        esp_http_client_set_header(evt->client, "From", "user@example.com");
-        esp_http_client_set_header(evt->client, "Accept", "text/html");
-        esp_http_client_set_redirection(evt->client);
         break;
     }
     return ESP_OK;
@@ -273,7 +315,9 @@ void https_with_url()
 
         .crt_bundle_attach = esp_crt_bundle_attach,
         // .buffer_size = 5,
-        .timeout_ms=20000,
+        .timeout_ms = 20000,
+        .buffer_size_tx = 4096,
+        // .buffer_size = 16384,
         // .timeout_ms = 1000,
         // .user_data = buff,
     };
@@ -281,7 +325,7 @@ void https_with_url()
     ESP_LOGI(TAG_htt, "HTTPS request with url =>");
     esp_http_client_handle_t client = esp_http_client_init(&config);
     // esp_http_client_set_method(client, HTTP_METHOD_HEAD);
-    esp_http_client_set_header(client, "Accept", "application/json");
+    esp_http_client_set_header(client, "Accept", "application/json, application/json; charset=utf-8");
     esp_http_client_set_header(client, "Authorization", "");
     esp_err_t err = esp_http_client_perform(client);
 
@@ -291,48 +335,69 @@ void https_with_url()
         ESP_LOGI(TAG_htt, "HTTPS Status = %d, content_length = %" PRId64,
                  esp_http_client_get_status_code(client),
                  len);
-        
+
         // char buffer[128];
 
         if (len > 0)
         {
-            char *response_buffer = malloc((size_t)(len + 1));
+            // uint8_t *response_buffer = malloc((size_t)len);
+            uint8_t *response_buffer = NULL;
+            // memset(response_buffer, 0, (size_t)len);
             printf("\n\\allocated response buffer\n");
             if (response_buffer != NULL)
             {
-                printf("Read length: %d\n", esp_http_client_read(client, response_buffer, len));
-                response_buffer[len] = '\0'; // Null-terminate the string
+                printf("Read length: %d\n", esp_http_client_read_response(client, (char *)(response_buffer), len));
+                printf("First char: %d\n", (int)response_buffer[0]);
+                printf("Last char: %d\n", (int)response_buffer[len - 1]);
+
+                FeedMessage *m = feed_message__unpack(NULL, len, response_buffer);
+                if (m != NULL)
+                {
+                    printf("Blah %ld", (long int)m->header->timestamp);
+                }
+                printf("pointer %p", response_buffer);
+                // for(int i = 0; i < m->n_entity; i++) {
+                //     // VehiclePosition *v = m->entity[i]->vehicle;
+                //     // TripDescriptor *t = v->trip;
+                //     // bool dir = t->direction_id;
+                //     // printf("Train: %s %s %d\n", t->route_id, v->stop_id, (int)t->direction_id);
+                //     // int route = strtol(t->route_id);
+                //     // int stop = strtol(t->route_id);
+                // }
+                feed_message__free_unpacked(m, NULL);
+
+                // esp_http_client_cleanup(client);
+                // free(response_buffer);
+                // response_buffer[len] = '\0'; // Null-terminate the string
 
                 int32_t i;
                 int32_t start_indx = 0;
                 UBaseType_t watermark = uxTaskGetStackHighWaterMark(NULL);
                 printf("Current Task Stack High Watermark (words): %u\n", watermark);
 
-                for (i = 0; i < len; i++)
+                for (i = 0; i < len + 4; i++)
                 {
-                    printf("%c", response_buffer[i]);
-                    char *he = "{\"header";
-                    if (strncmp(response_buffer + i, he, strlen(he)) == 0)
-                    {
-                        start_indx = i;
-                        break;
-                    }
+                    printf("%02x ", (int)(response_buffer[i]));
+                    // char *he = "{\"header";
+                    // if (strncmp(response_buffer + i, he, strlen(he)) == 0)
+                    // {
+                    //     start_indx = i;
+                    //     break;
+                    // }
                     // printf("%c", response_buffer[i]);
                 }
                 // printf("start: %s", response_buffer + start_indx);
                 // printf("\n");
 
-                printf("\n");
-                VehicleData vehicles[256];
-                uint8_t num_trains = parse_json(start_indx, response_buffer, vehicles);
+                // printf("\n");
+                // VehicleData vehicles[256];
+                // uint8_t num_trains = parse_json(start_indx, response_buffer, vehicles);
 
-                for (uint8_t i = 0; i < num_trains; i++)
-                {
-                    printf("Vehicle:\tdir: %d\troute: %d\tstop: %d\n", vehicles[i].dir, vehicles[i].routeId, vehicles[i].stopId);
-                }
-                printf("Current Task Stack High Watermark (words): %u\n", watermark);
-
-                free(response_buffer);
+                // for (uint8_t i = 0; i < num_trains; i++)
+                // {
+                //     printf("Vehicle:\tdir: %d\troute: %d\tstop: %d\n", vehicles[i].dir, vehicles[i].routeId, vehicles[i].stopId);
+                // }
+                // printf("Current Task Stack High Watermark (words): %u\n", watermark);
 
                 // ESP_LOGI(TAG_htt, "HTTP Response: %d %s", i, response_buffer);
 
@@ -341,6 +406,7 @@ void https_with_url()
             }
             else
             {
+                esp_http_client_cleanup(client);
                 ESP_LOGI(TAG_htt, "mallloooccc failed");
             }
 
@@ -354,10 +420,9 @@ void https_with_url()
         }
         else
         {
+            esp_http_client_cleanup(client);
             ESP_LOGE(TAG_htt, "Error perform http request %s", esp_err_to_name(err));
         }
-
-        esp_http_client_cleanup(client);
     }
     while (true)
     {

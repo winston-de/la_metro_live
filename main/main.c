@@ -207,12 +207,13 @@ void app_main(void)
 
     TaskHandle_t xHandle = NULL;
     static uint8_t ucParameterToPass = 1;
-    BaseType_t xReturned = xTaskCreate(https_with_url, "NAME", 11000, &ucParameterToPass, tskIDLE_PRIORITY + 1, &xHandle);
-    if(xReturned == pdPASS) {
-        printf("task created\n");
-    } else {
-        printf("task failed\n");
-    }
+    // BaseType_t xReturned = xTaskCreate(https_with_url, "NAME", 11000, &ucParameterToPass, tskIDLE_PRIORITY + 1, &xHandle);
+    https_with_url();
+    // if(xReturned == pdPASS) {
+    //     printf("task created\n");
+    // } else {
+    //     printf("task failed\n");
+    // }
 
     set_lgnd_colors();
     clear_all_leds(ae_strip);
