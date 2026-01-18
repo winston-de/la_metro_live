@@ -286,3 +286,116 @@ bool json_end() {
     }
     return true;
 }
+
+
+/////
+
+// uint8_t parse_json(int32_t start_indx, char *response_buffer, VehicleData *vehicles)
+// {
+//     char field[64];
+//     printf("start buffer %d\n", (int)start_indx);
+//     int32_t id;
+//     char vbuffer[32];
+
+//     // printf("start: %s", response_buffer + start_indx);
+//     printf("\n");
+//     uint8_t vehicle_index = 0;
+
+//     if (!json_read(response_buffer, start_indx))
+//     {
+//         printf("Failed to parse\n");
+//     }
+//     else
+//     {
+//         // return printf("failed to read output", 0;
+//         json_obj_iter(field, 64)
+//         {
+//             printf("iterating main obj\n");
+//             if (!strcmp(field, "entity"))
+//             {
+//                 // if (json_arr())
+//                 // {
+//                 printf("found entity\n");
+//                 json_arr_iter()
+//                 {
+//                     printf("iterating v arr\n");
+//                     // if (json_obj())
+//                     // {
+//                     json_obj_iter(field, sizeof(field))
+//                     {
+//                         printf("\titerating v obj\n");
+//                         if (!strcmp(field, "vehicle"))
+//                         {
+//                             VehicleData v = {};
+
+//                             json_obj_iter(field, sizeof(field))
+//                             {
+//                                 if (!strcmp(field, "trip"))
+//                                 {
+//                                     // if (json_obj())
+//                                     // {
+//                                     json_obj_iter(field, sizeof(field))
+//                                     {
+//                                         printf("\t\titerating trip\n");
+//                                         if (!strcmp(field, "routeId"))
+//                                         {
+//                                             if (json_str(vbuffer, sizeof(vbuffer)))
+//                                                 v.routeId = strtol(field, 0, 10);
+//                                             // v.routeId = 8181;
+//                                             // printf("\t\t\troute id %s\n", vbuffer);
+//                                         }
+//                                         else if (!strcmp(field, "directionId"))
+//                                         {
+//                                             if (json_int(&id))
+//                                                 v.dir = (bool)id;
+//                                             //     printf("\t\t\tdir id %ld\n", id);
+//                                             // else
+//                                             //     printf("\t\t\tmalformed dir\n");
+//                                         }
+//                                         else
+//                                         {
+//                                             json_skip(false);
+//                                         }
+//                                     }
+//                                     // }
+//                                     // else
+//                                     //     printf("\t\ttrip not an obj\n");
+//                                 }
+//                                 else if (!strcmp(field, "stopId"))
+//                                 {
+//                                     if (json_str(vbuffer, sizeof(vbuffer)))
+//                                     {
+//                                         v.stopId = strtol(field, 0, 10);
+//                                         // v.stopId = 10;
+//                                         if (v.stopId > 0)
+//                                         {
+//                                             v.stopId %= 10000;
+//                                         }
+//                                     }
+//                                     //     printf("\t\t\tstopId %s\n", vbuffer);
+//                                     // else
+//                                     //     printf("\t\t\tmalformed stopId\n");
+//                                 }
+//                                 else
+//                                 {
+//                                     json_skip(false);
+//                                 }
+//                             }
+//                             vehicles[vehicle_index] = v;
+//                             vehicle_index++;
+//                         }
+//                         else
+//                         {
+//                             json_skip(false);
+//                         }
+//                     }
+//                 }
+//             }
+//             else
+//             {
+//                 json_skip(false);
+//             }
+//         }
+//     }
+//     return vehicle_index;
+// }
