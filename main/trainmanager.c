@@ -12,6 +12,8 @@ static char *TAG = "TrainManager";
 MLine *lines;
 int num_lines = 0;
 led_strip_handle_t *led_strips;
+led_strip_handle_t lgnd_strip;
+
 LEDStrip *strips_data;
 int num_strips = 0;
 
@@ -31,6 +33,14 @@ void init_train_manager(void)
         printf("init LED gpio %d num leds %d\n", strips_data[i].gpio, strips_data[i].num_leds);
         led_strips[i] = configure_led_strip(strips_data[i].gpio, strips_data[i].num_leds);
     }
+
+
+    LEDStrip lgnd_data = get_lgnd_strip();
+    lgnd_strip = configure_led_strip(lgnd_data.gpio, lgnd_data.num_leds);
+    for(int i = 0; i < lgnd_data.num_leds; i++) {
+        led_strip_set_pixel(lgnd_strip,  lgnd_data.num_leds - i - 1, lines[i].color_r, lines[i].color_g, lines[i].color_b);
+    }
+    led_strip_refresh(lgnd_strip);
 } 
 
 void clean_clear_all_leds(void)
@@ -54,6 +64,9 @@ void set_train_data(VehiclePosition *v)
 {
     TripDescriptor *t = v->trip;
     // bool dir = t->direction_id;
+
+    // trains that are being moved on the system will show up in the API response, but will not have an associated trip
+    // and will not have an associated direction or next stop
     if (t)
     {
         uint16_t stop_id_i = (uint16_t)(strtol(v->stop_id, NULL, 10) % 10000);
@@ -70,13 +83,17 @@ void set_train_data(VehiclePosition *v)
                 {
                     if (lines[i].stations[j].id == stop_id_i)
                     {
+                        // printf("found station %d\n", lines[i].id);
                         Station *st = &(lines[i].stations[j]);
-                        // TODO: FIX DIRS
-                        uint8_t node = st->nodes[!dir];
+                        uint8_t node = st->nodes[dir];
                         printf("LED strip %d node %d\n", lines[i].strip_num, node);
+
+                        // a node of 255 indicates that the section of track is one-way, and there is no associated LED for that direction
+                        // This should never happen, as the API would have to return a train that's on nonexistent tracks
                         if(node != 255) {
                             ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[lines[i].strip_num], node, lines[i].color_r, lines[i].color_g, lines[i].color_b));
                         }
+                        break;
                     }
                 }
                 break;
@@ -111,6 +128,8 @@ void parse_train_data(uint8_t *buffer, size_t len)
             }
         }
         refresh_all_leds();
+
+        feed_message__free_unpacked(m, NULL);
     }
     else
     {

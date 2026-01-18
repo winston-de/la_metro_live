@@ -3,8 +3,8 @@ import os
 from typing import List, Optional
 
 # --- Configuration ---
-INPUT_FILE = '/Users/winstondejong/Projects/la_metro_live/mappings/Train mappings - Combined B_D.csv'
-OUTPUT_FILE = 'processed_output.txt'
+INPUT_FILE = '/Users/winstondejong/Projects/la_metro_live/mappings/Train mappings - Combined A_E.csv'
+OUTPUT_FILE = 'mappings/processed_output.txt'
 # ---------------------
 
 def process_row(row: List[str]) -> Optional[str]:

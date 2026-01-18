@@ -83,7 +83,7 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
                 output_len = 0;
                 if (output_buffer == NULL)
                 {
-                    ESP_LOGE(TAG_htt, "Failed to allocate memory for output buffer");
+                    ESP_LOGI(TAG_htt, "Failed to allocate memory for output buffer");
                     return ESP_FAIL;
                 }
             }
@@ -145,12 +145,16 @@ void https_with_url()
     esp_http_client_set_header(client, "Authorization", API_KEY);
     esp_err_t err = esp_http_client_perform(client);
 
+    UBaseType_t watermark = uxTaskGetStackHighWaterMark(NULL);
+    printf("Current Task Stack High Watermark (words): %u\n", watermark);
+
     if (err == ESP_OK)
     {
         int64_t len = esp_http_client_get_content_length(client);
         ESP_LOGI(TAG_htt, "HTTPS Status = %d, content_length = %" PRId64,
                  esp_http_client_get_status_code(client),
                  len);
-        esp_http_client_cleanup(client);
     }
+
+    esp_http_client_cleanup(client);
 }

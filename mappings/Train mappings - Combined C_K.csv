@@ -1,24 +1,24 @@
 Name,ID,Dir0 node,Dir1 node
-Redondo Beach,80301,32,31
-Douglas,80302,33,30
-El Segundo,80303,34,29
-Mariposa Station,80304,35,28
-Aviation / Imperial,80305,9,36
-Hawthorne / Lennox,80306,8,37
-Crenshaw,80307,7,38
-Vermont / Athens,80308,6,39
-Harbor Freeway,80309,5,40
-Avalon,80310,4,41
-Willowbrook - Rosa Parks,80311,3,42
-Lynwood,80312,2,43
-Lakewood Blvd,80313,1,44
-Norwalk Station,80314,0,45
-Aviation / Century,80701,10,27
-LAX / Metro Transit Center,80702,11,26
-Westchester / Veterans,80703,12,25
-Downtown Inglewood,80704,13,24
-Fairview Heights,80705,14,23
-Hyde Park,80706,15,22
-Leimert Park,80707,16,21
-Martin Luther King Jr,80708,17,20
-Expo / Crenshaw K-Line,80709,18,19
+Redondo Beach,80301,31,32
+Douglas,80302,30,33
+El Segundo,80303,29,34
+Mariposa Station,80304,28,35
+Aviation / Imperial,80305,36,9
+Hawthorne / Lennox,80306,37,8
+Crenshaw,80307,38,7
+Vermont / Athens,80308,39,6
+Harbor Freeway,80309,40,5
+Avalon,80310,41,4
+Willowbrook - Rosa Parks,80311,42,3
+Lynwood,80312,43,2
+Lakewood Blvd,80313,44,1
+Norwalk Station,80314,45,0
+Aviation / Century,80701,27,10
+LAX / Metro Transit Center,80702,26,11
+Westchester / Veterans,80703,25,12
+Downtown Inglewood,80704,24,13
+Fairview Heights,80705,23,14
+Hyde Park,80706,22,15
+Leimert Park,80707,21,16
+Martin Luther King Jr,80708,20,17
+Expo / Crenshaw K-Line,80709,19,18

@@ -159,7 +159,7 @@ void app_main(void)
     // if(do_chase) {
         //     period = 500000;
         // }
-    uint64_t period = 10*1000*1000;
+    uint64_t period = 6*1000*1000;
 
     ESP_ERROR_CHECK(esp_timer_create(&my_timer_args, &timer_handler));
     ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, period));
