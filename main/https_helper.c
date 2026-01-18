@@ -29,6 +29,7 @@
 #include "justinjson.h"
 
 #include "gtfs-realtime.pb-c.h"
+#include "secrets.h"
 
 #define MAX_HTTP_RECV_BUFFER 512
 #define MAX_HTTP_OUTPUT_BUFFER 2048
@@ -326,7 +327,7 @@ void https_with_url()
     esp_http_client_handle_t client = esp_http_client_init(&config);
     // esp_http_client_set_method(client, HTTP_METHOD_HEAD);
     esp_http_client_set_header(client, "Accept", "application/json, application/json; charset=utf-8");
-    esp_http_client_set_header(client, "Authorization", "");
+    esp_http_client_set_header(client, "Authorization", API_KEY);
     esp_err_t err = esp_http_client_perform(client);
 
     if (err == ESP_OK)
