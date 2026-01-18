@@ -12,17 +12,33 @@
 #include "esp_random.h"
 #include "trainmanager.h"
 #include "led_helper.h"
+#include "esp_netif.h"
+#include "esp_sntp.h"
+#include "esp_netif_sntp.h"
+#include "esp_log.h"
 // #include "line_mapping.c"
 
 #include "simulator.h"
 #include "line_mapping.h"
 
 // GPIO assignment
-#define LED_STRIP_GPIO_PIN  26
+#define LED_STRIP_GPIO_PIN 26
 // Numbers of the LED in the strip
 #define LED_STRIP_LED_COUNT 6
 
-#define LED_STRIP_RMT_RES_HZ  (10 * 1000 * 1000)
+#define LED_STRIP_RMT_RES_HZ (10 * 1000 * 1000)
+
+// current time zone
+#define TZ "PST8PDT,M3.2.0,M11.1.0"
+// what time the board should turn on in the morning and off at night
+#define ONTIME 7
+#define OFFTIME 22
+
+// how often the board should update data (seconds)
+// API is only accurate to 3s, so don't make it less than that
+#define UPDATE_PERIOD 6
+// minutes
+#define TIME_SYNC_PERIOD 60
 
 // static const char *TAG = "example";
 
@@ -30,9 +46,6 @@ static led_strip_handle_t lgnd_strip;
 static led_strip_handle_t ae_strip;
 static led_strip_handle_t bd_strip;
 static led_strip_handle_t ck_strip;
-
-
-
 
 // void set_all_leds(led_strip_handle_t led_strip, uint32_t r, uint32_t g, uint32_t b, uint8_t max_leds) {
 //     /* Set the LED pixel using RGB from 0 (0%) to 255 (100%) for each color */
@@ -64,7 +77,8 @@ static int ae_i[20];
 static int bd_i[10];
 static int ck_i[8];
 
-void chase_setup(void) {
+void chase_setup(void)
+{
     // for(int i = 0; i < ARRL(ae_i); i++) {
     //     int res = (int)AE_LEDS / ((int)(ARRL(ae_i)));
     //     ESP_LOGI(TAG, "Value: %d    %d  %d", res, ARRL(ae_i), AE_LEDS);
@@ -80,37 +94,10 @@ void chase_setup(void) {
     // }
 }
 
-void chase(void) {
-    // ESP_ERROR_CHECK(led_strip_clear(ae_strip));
-    // ESP_ERROR_CHECK(led_strip_clear(bd_strip));
-    // ESP_ERROR_CHECK(led_strip_clear(ck_strip));
-
-    // for(int i = 0; i < ARRL(ae_i); i++) {
-    //     ESP_ERROR_CHECK(led_strip_set_pixel(ae_strip, ae_i[i], A_LED_VAL));
-    //     ae_i[i]++;
-    //     if(ae_i[i] >= AE_LEDS) ae_i[i] = 0;
-    // }
-    
-    // for(int i = 0; i < ARRL(bd_i); i++) {
-    //     ESP_ERROR_CHECK(led_strip_set_pixel(bd_strip, bd_i[i], B_LED_VAL));
-    //     bd_i[i]++;
-    //     if(bd_i[i] >= BD_LEDS) bd_i[i] = 0;
-    // }
-    
-    // for(int i = 0; i < ARRL(ck_i); i++) {
-    //     ESP_ERROR_CHECK(led_strip_set_pixel(ck_strip, ck_i[i], C_LED_VAL));
-    //     ck_i[i]++;
-    //     if(ck_i[i] >= CK_LEDS) ck_i[i] = 0;
-    // }
-
-    // ESP_ERROR_CHECK(led_strip_refresh(ae_strip));
-    // ESP_ERROR_CHECK(led_strip_refresh(bd_strip));
-    // ESP_ERROR_CHECK(led_strip_refresh(ck_strip));
-
-}
-
-void simulator(void) {
-
+void sync_time(void)
+{
+    esp_sntp_config_t config = ESP_NETIF_SNTP_DEFAULT_CONFIG("pool.ntp.org");
+    esp_netif_sntp_init(&config);
 }
 
 const bool do_chase = 1;
@@ -123,22 +110,47 @@ struct LineSim sims[6];
 //     ESP_ERROR_CHECK(led_strip_refresh(ck_strip));
 // }
 
-void run_on_all_sims(void (*f)(struct LineSim *)) {
-    for(int i = 0; i < ARRL(sims); i++) {
+void run_on_all_sims(void (*f)(struct LineSim *))
+{
+    for (int i = 0; i < ARRL(sims); i++)
+    {
         f(&sims[i]);
     }
-} 
+}
 
+static bool cleared = false;
 
-void timer_callback(void *param)
+void update_timer_callback(void *param)
 {
-    https_with_url();
-    // if(do_chase) {chase();} else {
-    //     run_on_all_sims(clear_all_stations);
-    //     run_on_all_sims(simulate_update);
-    //     // refresh_all_lines();
-    // }
 
+    // this code turns the lights off during the night
+    time_t now;
+    struct tm timeinfo;
+
+    time(&now);
+    setenv("TZ", TZ, 1);
+    tzset();
+
+    localtime_r(&now, &timeinfo);
+
+    if (timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour <= OFFTIME)
+    {
+        https_with_url();
+        cleared = false;
+    }
+    else if (!cleared)
+    {
+        printf("Clearing\n");
+        clear_all_leds();
+        cleared = true;
+    }
+    printf("Current time %d\n", timeinfo.tm_hour);
+}
+
+void sync_time_callback(void *param)
+{
+    ESP_LOGI(TAG, "Syncing time");
+    sync_time();
 }
 
 void app_main(void)
@@ -146,54 +158,25 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    // lgnd_strip = configure_led_strip(26, LGND_LEDS);
-    // ae_strip = configure_led_strip(27, AE_LEDS);
-    // bd_strip = configure_led_strip(14, BD_LEDS);
-    // ck_strip = configure_led_strip(12, CK_LEDS);
-
-    const esp_timer_create_args_t my_timer_args = {
-      .callback = &timer_callback,
-      .name = "LED Timer"};
-    esp_timer_handle_t timer_handler;
-    
-    // if(do_chase) {
-        //     period = 500000;
-        // }
-    uint64_t period = 6*1000*1000;
-
-    ESP_ERROR_CHECK(esp_timer_create(&my_timer_args, &timer_handler));
-    ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, period));
     init_wifi();
     init_train_manager();
-    // https_with_url();
+    sync_time();
 
-    // BaseType_t xReturned = xTaskCreate(https_with_url, "NAME", 11000, &ucParameterToPass, tskIDLE_PRIORITY + 1, &xHandle);
-    https_with_url();
-    // if(xReturned == pdPASS) {
-    //     printf("task created\n");
-    // } else {
-    //     printf("task failed\n");
-    // }
+    const esp_timer_create_args_t led_timer_args = {
+        .callback = &update_timer_callback,
+        .name = "Train update"};
+    esp_timer_handle_t update_timer_handler;
+    ESP_ERROR_CHECK(esp_timer_create(&led_timer_args, &update_timer_handler));
+    ESP_ERROR_CHECK(esp_timer_start_periodic(update_timer_handler, UPDATE_PERIOD * 1000 * 1000));
 
-    // set_lgnd_colors();
-    // clear_all_leds(ae_strip);
-    // clear_all_leds(bd_strip);
-    // clear_all_leds(ck_strip);
+    // timer for time sync
+    const esp_timer_create_args_t sync_timer_args = {
+        .callback = &sync_time_callback,
+        .name = "Time sync update"};
+    esp_timer_handle_t sync_timer_handler;
+    ESP_ERROR_CHECK(esp_timer_create(&sync_timer_args, &sync_timer_handler));
+    ESP_ERROR_CHECK(esp_timer_start_periodic(sync_timer_handler, TIME_SYNC_PERIOD*(uint64_t)(60 * 1000 * 1000)));
+    
+    update_timer_callback(NULL);
 
-
-    if(do_chase) {
-        // chase_setup();
-    } else {
-        // sims[0] = initialize_line(ae_strip, get_a_line(), 23, 2);
-        // sims[1] = initialize_line(ae_strip, get_e_line(), 9, 1);
-        // sims[2] = initialize_line(bd_strip, get_b_line(), 6, 3);
-        // sims[3] = initialize_line(bd_strip, get_d_line(), 3, 0);
-        // sims[4] = initialize_line(ck_strip, get_c_line(), 7, 0);
-        // sims[5] = initialize_line(ck_strip, get_k_line(), 6, 0);
-        // refresh_all_lines();
-    }
-    // init_wifi();
-    // set_all_leds(ae_strip, A_LED_VAL, AE_LEDS);
-    // set_all_leds(bd_strip, B_LED_VAL, BD_LEDS);
-    // set_all_leds(ck_strip, C_LED_VAL, CK_LEDS);
 }

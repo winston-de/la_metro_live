@@ -33,6 +33,7 @@ void init_train_manager(void)
         printf("init LED gpio %d num leds %d\n", strips_data[i].gpio, strips_data[i].num_leds);
         led_strips[i] = configure_led_strip(strips_data[i].gpio, strips_data[i].num_leds);
     }
+    clear_all_leds();
 
 
     LEDStrip lgnd_data = get_lgnd_strip();
@@ -50,6 +51,14 @@ void clean_clear_all_leds(void)
         for(int j = 0; j < strips_data[i].num_leds; j++) {
             led_strip_set_pixel(led_strips[i], j, 0, 0, 0);
         }
+    }
+}
+
+void clear_all_leds(void)
+{
+    for (int i = 0; i < num_strips; i++)
+    {
+        led_strip_clear(led_strips[i]);
     }
 }
 

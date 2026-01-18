@@ -6,6 +6,6 @@
 void parse_train_data(uint8_t *buffer, size_t len);
 
 void init_train_manager(void);
-
+void clear_all_leds(void);
 
 #endif
