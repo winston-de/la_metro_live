@@ -15,6 +15,8 @@ led_strip_handle_t *led_strips;
 led_strip_handle_t lgnd_strip;
 
 LEDStrip *strips_data;
+LEDStrip lgnd_data;
+
 int num_strips = 0;
 
 void init_train_manager(void)
@@ -35,20 +37,31 @@ void init_train_manager(void)
     }
     clear_all_leds();
 
-
-    LEDStrip lgnd_data = get_lgnd_strip();
+    lgnd_data = get_lgnd_strip();
     lgnd_strip = configure_led_strip(lgnd_data.gpio, lgnd_data.num_leds);
-    for(int i = 0; i < lgnd_data.num_leds; i++) {
-        led_strip_set_pixel(lgnd_strip,  lgnd_data.num_leds - i - 1, lines[i].color_r, lines[i].color_g, lines[i].color_b);
+    draw_legend();
+}
+
+void clear_legend(void)
+{
+    led_strip_clear(lgnd_strip);
+}
+
+void draw_legend(void)
+{
+    for (int i = 0; i < lgnd_data.num_leds; i++)
+    {
+        led_strip_set_pixel(lgnd_strip, lgnd_data.num_leds - i - 1, lines[i].color_r, lines[i].color_g, lines[i].color_b);
     }
     led_strip_refresh(lgnd_strip);
-} 
+}
 
 void clean_clear_all_leds(void)
 {
     for (int i = 0; i < num_strips; i++)
     {
-        for(int j = 0; j < strips_data[i].num_leds; j++) {
+        for (int j = 0; j < strips_data[i].num_leds; j++)
+        {
             led_strip_set_pixel(led_strips[i], j, 0, 0, 0);
         }
     }
@@ -99,7 +112,8 @@ void set_train_data(VehiclePosition *v)
 
                         // a node of 255 indicates that the section of track is one-way, and there is no associated LED for that direction
                         // This should never happen, as the API would have to return a train that's on nonexistent tracks
-                        if(node != 255) {
+                        if (node != 255)
+                        {
                             ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[lines[i].strip_num], node, lines[i].color_r, lines[i].color_g, lines[i].color_b));
                         }
                         break;
@@ -122,7 +136,7 @@ void parse_train_data(uint8_t *buffer, size_t len)
     if (m != NULL)
     {
         printf("clearing leds\n");
-            clean_clear_all_leds();
+        clean_clear_all_leds();
 
         for (int i = 0; i < m->n_entity; i++)
         {

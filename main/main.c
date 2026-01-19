@@ -58,12 +58,16 @@ void update_timer_callback(void *param)
 
     if (timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour < OFFTIME)
     {
+        if(cleared) {
+            draw_legend();
+        }
         https_with_url();
         cleared = false;
     }
     else if (!cleared)
     {
         printf("Clearing\n");
+        clear_legend();
         clear_all_leds();
         cleared = true;
     }

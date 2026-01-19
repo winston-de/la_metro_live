@@ -7,12 +7,13 @@ https://github.com/user-attachments/assets/ebdb1551-d2c1-4a6d-937b-43f40449b2b8
 
 ## PCB Design
 The PCB is designed with several major features:
-- The main power input, and individual inputs to each set of LEDs have fuses that will blow at about 20% below the maximum current rating of the traces
-- A Schottky diode is placed before the 5V input for the ESP32 to prevent accidentally powering the LEDs directly from the ESP32, which would occur when the USB cable for the ESP is plugged in, but the power cable is not
+- All power traces have fuses that will blow at about 20% below the maximum current rating of the corresponding trace
+- Trace widths were determined based on worst-case power consumption by the LEDs and space optimization
+- A Schottky diode is located in from of the 5V input for the ESP32 to prevent accidental backfeeding, which would otherwwise occur when the USB cable is connected but not the power cable
 - All LEDs have capacitors between power and ground to help ensure power stability
-- Each line can be completely isolated using jumpers (0Ω resistors)
+- Each line can be completely isolated using jumpers (0Ω resistors) to ease troubleshooting
 
-The board uses WS2812C-2020 pixels, which are individually addressable work very similar to LED strip lighting. There are four chains of LEDs, each connected in a large loop. They are grouped by sets of tracks rather than individual lines. For example, the A and E lines share tracks, so they are both part of one chain. The mappings for stations to nodes can be found in `mappings/*`.
+The board uses WS2812C-2020 individually addressable pixels, which is the same technology as LED strip lighting. There are four strips of LEDs, each connected in separate loops. They are grouped by sets of tracks rather than individual lines. For example, the A and E lines share tracks, so they are both part of one strip. The mappings for stations to individual pixels can be found in `mappings/*`.
 
 <img src="assets/PCB.png" width="500"/>
 
