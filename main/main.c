@@ -4,24 +4,14 @@
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_timer.h"
-#include "esp_mac.h"
 #include "wifi_access.c"
 #include "https_helper.c"
-#include "esp_random.h"
 #include "trainmanager.h"
-#include "led_helper.h"
-#include "esp_netif.h"
-#include "esp_sntp.h"
 #include "esp_netif_sntp.h"
 #include "esp_log.h"
-#include "line_mapping.h"
-
-// GPIO assignment
-#define LED_STRIP_GPIO_PIN 26
-// Numbers of the LED in the strip
-#define LED_STRIP_LED_COUNT 6
-
-#define LED_STRIP_RMT_RES_HZ (10 * 1000 * 1000)
+#include "driver/gpio.h"
+#include "button_gpio.h"
+#include "iot_button.h"
 
 // current time zone
 #define TZ "PST8PDT,M3.2.0,M11.1.0"
@@ -32,7 +22,8 @@
 // how often the board should update data (seconds)
 // API is only accurate to 3s, so don't make it less than that
 #define UPDATE_PERIOD 6
-// minutes
+
+// How often the ESP should sync time with the server (minutes)
 #define TIME_SYNC_PERIOD 60
 
 void sync_time(void)
@@ -46,7 +37,7 @@ static bool cleared = false;
 void update_timer_callback(void *param)
 {
 
-    // this code turns the lights off during the night
+    // this code turns the lights off and stops polling the API at night
     time_t now;
     struct tm timeinfo;
 
@@ -58,7 +49,8 @@ void update_timer_callback(void *param)
 
     if (timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour < OFFTIME)
     {
-        if(cleared) {
+        if (cleared)
+        {
             draw_legend();
         }
         https_with_url();
@@ -71,6 +63,7 @@ void update_timer_callback(void *param)
         clear_all_leds();
         cleared = true;
     }
+
     printf("Current time %d\n", timeinfo.tm_hour);
 }
 
@@ -78,6 +71,42 @@ void sync_time_callback(void *param)
 {
     ESP_LOGI(TAG, "Syncing time");
     sync_time();
+}
+
+// create gpio button
+const button_config_t brightness_up_btn_cfg = {0};
+const button_gpio_config_t brightness_up_btn_gpio_cfg = {
+    .gpio_num = 0,
+    .active_level = 0,
+};
+
+const button_config_t brightness_dn_btn_cfg = {0};
+const button_gpio_config_t brightness_dn_btn_gpio_cfg = {
+    .gpio_num = 4,
+    .active_level = 0,
+};
+
+void brightness_up_pressed(void *arg,void *usr_data)
+{
+    ESP_LOGI(TAG, "Brightness up pressed");
+    change_brightness(1);
+}
+
+void brightness_down_pressed(void *arg,void *usr_data)
+{
+    ESP_LOGI(TAG, "Brightness down pressed");
+    change_brightness(-1);
+}
+
+void setup_buttons(void)
+{
+    button_handle_t bright_up_bttn = NULL;
+    ESP_ERROR_CHECK(iot_button_new_gpio_device(&brightness_up_btn_cfg, &brightness_up_btn_gpio_cfg, &bright_up_bttn));
+    iot_button_register_cb(bright_up_bttn, BUTTON_SINGLE_CLICK, NULL, brightness_up_pressed, NULL);
+
+    button_handle_t bright_dn_bttn = NULL;
+    ESP_ERROR_CHECK(iot_button_new_gpio_device(&brightness_dn_btn_cfg, &brightness_dn_btn_gpio_cfg, &bright_dn_bttn));
+    iot_button_register_cb(bright_dn_bttn, BUTTON_SINGLE_CLICK, NULL, brightness_down_pressed, NULL);
 }
 
 void app_main(void)
@@ -102,8 +131,9 @@ void app_main(void)
         .name = "Time sync update"};
     esp_timer_handle_t sync_timer_handler;
     ESP_ERROR_CHECK(esp_timer_create(&sync_timer_args, &sync_timer_handler));
-    ESP_ERROR_CHECK(esp_timer_start_periodic(sync_timer_handler, TIME_SYNC_PERIOD*(uint64_t)(60 * 1000 * 1000)));
-    
-    update_timer_callback(NULL);
+    ESP_ERROR_CHECK(esp_timer_start_periodic(sync_timer_handler, TIME_SYNC_PERIOD * (uint64_t)(60 * 1000 * 1000)));
 
+    setup_buttons();
+
+    update_timer_callback(NULL);
 }

@@ -10,5 +10,7 @@ void clear_all_leds(void);
 
 void clear_legend(void);
 void draw_legend(void);
+void show_error_status(void);
+void change_brightness(int8_t diff);
 
 #endif
