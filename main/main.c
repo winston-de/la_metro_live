@@ -33,6 +33,23 @@ void sync_time(void)
 }
 
 static bool cleared = false;
+static uint8_t overrideState = 0; // 0 = no override, 1 = override off, 2 = override on
+
+void core_task(void *pvParameters)
+{
+    static bool running = false;
+    if (!running)
+    {
+        running = true;
+        https_with_url();
+        refresh_all_leds();
+        running = false;
+    } else {
+        ESP_LOGI(TAG, "Already running update, skipping");
+    }
+
+    vTaskDelete(NULL);
+}
 
 void update_timer_callback(void *param)
 {
@@ -47,24 +64,37 @@ void update_timer_callback(void *param)
 
     localtime_r(&now, &timeinfo);
 
-    if (timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour < OFFTIME)
+    if ((timeinfo.tm_hour >= ONTIME && timeinfo.tm_hour < OFFTIME && overrideState != 1) || overrideState == 2)
     {
         if (cleared)
         {
-            draw_legend();
+            set_state(true);
         }
-        https_with_url();
+        // https_with_url();
+        xTaskCreatePinnedToCore(
+            core_task,      // Function to implement the task
+            "Update Board", // Name of the task
+            12000,          // Stack size in words (or bytes depending on IDF version)
+            NULL,           // Task input parameter
+            1,              // Priority of the task
+            NULL,           // Task handle (can be NULL if not needed)
+            1               // Core to pin to (0 for PRO_CPU, 1 for APP_CPU)
+        );
+
         cleared = false;
     }
     else if (!cleared)
     {
         printf("Clearing\n");
-        clear_legend();
-        clear_all_leds();
+        set_state(false);
         cleared = true;
     }
 
     printf("Current time %d\n", timeinfo.tm_hour);
+}
+
+void force_update(void) {
+    update_timer_callback(NULL);   
 }
 
 void sync_time_callback(void *param)
@@ -86,16 +116,45 @@ const button_gpio_config_t brightness_dn_btn_gpio_cfg = {
     .active_level = 0,
 };
 
-void brightness_up_pressed(void *arg,void *usr_data)
+const button_config_t power_btn_cfg = {0};
+const button_gpio_config_t power_btn_gpio_cfg = {
+    .gpio_num = 2,
+    .active_level = 0,
+};
+
+void brightness_up_pressed(void *arg, void *usr_data)
 {
     ESP_LOGI(TAG, "Brightness up pressed");
     change_brightness(1);
+    force_update();
 }
 
-void brightness_down_pressed(void *arg,void *usr_data)
+void brightness_down_pressed(void *arg, void *usr_data)
 {
     ESP_LOGI(TAG, "Brightness down pressed");
     change_brightness(-1);
+    force_update();
+}
+
+void power_pressed(void *arg, void *usr_data)
+{
+    ESP_LOGI(TAG, "Power pressed");
+    if (cleared)
+    {
+        overrideState = 2;
+    }
+    else
+    {
+        overrideState = 1;
+    }
+    force_update();
+}
+
+void power_double_pressed(void *arg, void *usr_data)
+{
+    ESP_LOGI(TAG, "Power double");
+    overrideState = 0;
+    force_update();
 }
 
 void setup_buttons(void)
@@ -107,6 +166,11 @@ void setup_buttons(void)
     button_handle_t bright_dn_bttn = NULL;
     ESP_ERROR_CHECK(iot_button_new_gpio_device(&brightness_dn_btn_cfg, &brightness_dn_btn_gpio_cfg, &bright_dn_bttn));
     iot_button_register_cb(bright_dn_bttn, BUTTON_SINGLE_CLICK, NULL, brightness_down_pressed, NULL);
+
+    button_handle_t power_bttn = NULL;
+    ESP_ERROR_CHECK(iot_button_new_gpio_device(&power_btn_cfg, &power_btn_gpio_cfg, &power_bttn));
+    iot_button_register_cb(power_bttn, BUTTON_SINGLE_CLICK, NULL, power_pressed, NULL);
+    iot_button_register_cb(power_bttn, BUTTON_DOUBLE_CLICK, NULL, power_double_pressed, NULL);
 }
 
 void app_main(void)
@@ -134,6 +198,5 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_timer_start_periodic(sync_timer_handler, TIME_SYNC_PERIOD * (uint64_t)(60 * 1000 * 1000)));
 
     setup_buttons();
-
-    update_timer_callback(NULL);
+    force_update();
 }

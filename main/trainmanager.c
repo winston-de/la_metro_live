@@ -21,7 +21,7 @@ int num_lines = 0;
 led_strip_handle_t *led_strips;
 led_strip_handle_t lgnd_strip;
 
-static uint8_t brightness_factor = 1;
+static uint8_t brightness_factor = 2;
 const uint8_t max_brightness = 10;
 
 LEDStrip *strips_data;
@@ -75,6 +75,18 @@ void clean_clear_all_leds(void)
         {
             ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[i], j, 0, 0, 0));
         }
+    }
+}
+
+static bool leds_enabled = true;
+
+void set_state(bool enabled) {
+    leds_enabled = enabled;
+    if(!enabled) {
+        clear_all_leds();
+        clear_legend();
+    } else {
+        draw_legend();
     }
 }
 
@@ -184,7 +196,10 @@ void parse_train_data(uint8_t *buffer, size_t len)
                 set_train_data(v);
             }
         }
-        refresh_all_leds();
+        // if(leds_enabled) {
+        if(!leds_enabled) {
+            clean_clear_all_leds();
+        }
 
         feed_message__free_unpacked(m, NULL);
     }
