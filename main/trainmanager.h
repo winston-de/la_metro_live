@@ -15,5 +15,5 @@ void show_error_status(void);
 void change_brightness(int8_t diff);
 void set_state(bool enabled);
 void refresh_all_leds(void);
-
+void run_test(void);
 #endif

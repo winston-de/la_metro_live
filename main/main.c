@@ -26,6 +26,8 @@
 // How often the ESP should sync time with the server (minutes)
 #define TIME_SYNC_PERIOD 60
 
+#define TEST 0
+
 void sync_time(void)
 {
     esp_sntp_config_t config = ESP_NETIF_SNTP_DEFAULT_CONFIG("pool.ntp.org");
@@ -44,7 +46,9 @@ void core_task(void *pvParameters)
         https_with_url();
         refresh_all_leds();
         running = false;
-    } else {
+    }
+    else
+    {
         ESP_LOGI(TAG, "Already running update, skipping");
     }
 
@@ -93,8 +97,9 @@ void update_timer_callback(void *param)
     printf("Current time %d\n", timeinfo.tm_hour);
 }
 
-void force_update(void) {
-    update_timer_callback(NULL);   
+void force_update(void)
+{
+    update_timer_callback(NULL);
 }
 
 void sync_time_callback(void *param)
@@ -178,8 +183,18 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    init_wifi();
     init_train_manager();
+
+#if TEST
+    while(true) {
+        clear_all_leds();
+        clear_legend();
+        sleep(1);
+        run_test();
+        sleep(1);
+    }
+#else
+    init_wifi();
     sync_time();
 
     const esp_timer_create_args_t led_timer_args = {
@@ -199,4 +214,6 @@ void app_main(void)
 
     setup_buttons();
     force_update();
+
+#endif
 }

@@ -13,8 +13,7 @@ static char *TAG = "TrainManager";
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
-
-#define SAFE_BRIGHTNESS(c) MIN(c*brightness_factor, 255)
+#define SAFE_BRIGHTNESS(c) MIN(c *brightness_factor, 255)
 
 MLine *lines;
 int num_lines = 0;
@@ -47,12 +46,29 @@ void init_train_manager(void)
     draw_legend();
 }
 
+void run_test(void)
+{
+    // clear_all_leds();
+    draw_legend();
+
+    for (int i = 0; i < num_strips; i++)
+    {
+        for (int j = 0; j < strips_data[i].num_leds; j++)
+        {
+            ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[i], j, 10, 0, 0));
+        }
+    }
+
+    refresh_all_leds();
+}
+
 void clear_legend(void)
 {
     ESP_ERROR_CHECK(led_strip_clear(lgnd_strip));
 }
 
-void change_brightness(int8_t diff) {
+void change_brightness(int8_t diff)
+{
     brightness_factor = MAX(MIN(max_brightness, brightness_factor + diff), 1);
     draw_legend();
 }
@@ -61,8 +77,8 @@ void draw_legend(void)
 {
     for (int i = 0; i < lgnd_data.num_leds; i++)
     {
-        ESP_ERROR_CHECK(led_strip_set_pixel(lgnd_strip, lgnd_data.num_leds - i - 1, 
-            SAFE_BRIGHTNESS(lines[i].color_r), SAFE_BRIGHTNESS(lines[i].color_g), SAFE_BRIGHTNESS(lines[i].color_b)));
+        ESP_ERROR_CHECK(led_strip_set_pixel(lgnd_strip, lgnd_data.num_leds - i - 1,
+                                            SAFE_BRIGHTNESS(lines[i].color_r), SAFE_BRIGHTNESS(lines[i].color_g), SAFE_BRIGHTNESS(lines[i].color_b)));
     }
     ESP_ERROR_CHECK(led_strip_refresh(lgnd_strip));
 }
@@ -80,12 +96,16 @@ void clean_clear_all_leds(void)
 
 static bool leds_enabled = true;
 
-void set_state(bool enabled) {
+void set_state(bool enabled)
+{
     leds_enabled = enabled;
-    if(!enabled) {
+    if (!enabled)
+    {
         clear_all_leds();
         clear_legend();
-    } else {
+    }
+    else
+    {
         draw_legend();
     }
 }
@@ -165,8 +185,8 @@ void set_train_data(VehiclePosition *v)
                     // This should never happen, as the API would have to return a train that's on nonexistent tracks
                     if (node != 255)
                     {
-                        ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[lines[i].strip_num], node, 
-                            SAFE_BRIGHTNESS(lines[i].color_r), SAFE_BRIGHTNESS(lines[i].color_g), SAFE_BRIGHTNESS(lines[i].color_b)));
+                        ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[lines[i].strip_num], node,
+                                                            SAFE_BRIGHTNESS(lines[i].color_r), SAFE_BRIGHTNESS(lines[i].color_g), SAFE_BRIGHTNESS(lines[i].color_b)));
                     }
                     break;
                 }
@@ -197,7 +217,8 @@ void parse_train_data(uint8_t *buffer, size_t len)
             }
         }
         // if(leds_enabled) {
-        if(!leds_enabled) {
+        if (!leds_enabled)
+        {
             clean_clear_all_leds();
         }
 
