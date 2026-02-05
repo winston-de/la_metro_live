@@ -185,8 +185,11 @@ void set_train_data(VehiclePosition *v)
                     // This should never happen, as the API would have to return a train that's on nonexistent tracks
                     if (node != 255)
                     {
-                        ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[lines[i].strip_num], node,
-                                                            SAFE_BRIGHTNESS(lines[i].color_r), SAFE_BRIGHTNESS(lines[i].color_g), SAFE_BRIGHTNESS(lines[i].color_b)));
+                        uint8_t r = SAFE_BRIGHTNESS(lines[i].color_r);
+                        uint8_t g = SAFE_BRIGHTNESS(lines[i].color_g);
+                        uint8_t b = SAFE_BRIGHTNESS(lines[i].color_b);
+                        ESP_ERROR_CHECK(led_strip_set_pixel(led_strips[lines[i].strip_num], node, r, g, b));
+                        ESP_LOGI(TAG, "Writing %d %d %d to strip %d", r, g, b, lines[i].strip_num);
                     }
                     break;
                 }
@@ -216,12 +219,12 @@ void parse_train_data(uint8_t *buffer, size_t len)
                 set_train_data(v);
             }
         }
-        // if(leds_enabled) {
         if (!leds_enabled)
         {
             clean_clear_all_leds();
         }
 
+        refresh_all_leds();
         feed_message__free_unpacked(m, NULL);
     }
     else

@@ -28,6 +28,11 @@
 
 #define TEST 0
 
+
+#define REQUEST_UPDATE_EVENT_ID 20
+ESP_EVENT_DECLARE_BASE(CUSTOM_EVENTS);
+ESP_EVENT_DEFINE_BASE(CUSTOM_EVENTS);
+
 void sync_time(void)
 {
     esp_sntp_config_t config = ESP_NETIF_SNTP_DEFAULT_CONFIG("pool.ntp.org");
@@ -44,7 +49,7 @@ void core_task(void *pvParameters)
     {
         running = true;
         https_with_url();
-        refresh_all_leds();
+        // refresh_all_leds();
         running = false;
     }
     else
@@ -58,6 +63,7 @@ void core_task(void *pvParameters)
 void update_timer_callback(void *param)
 {
 
+    static bool running = false;
     // this code turns the lights off and stops polling the API at night
     time_t now;
     struct tm timeinfo;
@@ -74,16 +80,24 @@ void update_timer_callback(void *param)
         {
             set_state(true);
         }
-        // https_with_url();
-        xTaskCreatePinnedToCore(
-            core_task,      // Function to implement the task
-            "Update Board", // Name of the task
-            12000,          // Stack size in words (or bytes depending on IDF version)
-            NULL,           // Task input parameter
-            1,              // Priority of the task
-            NULL,           // Task handle (can be NULL if not needed)
-            1               // Core to pin to (0 for PRO_CPU, 1 for APP_CPU)
-        );
+
+        if(!running) {
+            running = true;
+            https_with_url();
+            running = false;
+        } else {
+            ESP_LOGI(TAG, "Already in progress");
+        }
+        // refresh_all_leds();
+        // xTaskCreatePinnedToCore(
+        //     core_task,      // Function to implement the task
+        //     "Update Board", // Name of the task
+        //     DEFAULT_THREAD_STACKSIZE*4,          // Stack size in words (or bytes depending on IDF version)
+        //     NULL,           // Task input parameter
+        //     1,              // Priority of the task
+        //     NULL,           // Task handle (can be NULL if not needed)
+        //     1               // Core to pin to (0 for PRO_CPU, 1 for APP_CPU)
+        // );
 
         cleared = false;
     }
@@ -95,6 +109,10 @@ void update_timer_callback(void *param)
     }
 
     printf("Current time %d\n", timeinfo.tm_hour);
+}
+
+void request_force_update(void) {
+    esp_event_post(CUSTOM_EVENTS, REQUEST_UPDATE_EVENT_ID, NULL, 0, portMAX_DELAY);
 }
 
 void force_update(void)
@@ -131,14 +149,14 @@ void brightness_up_pressed(void *arg, void *usr_data)
 {
     ESP_LOGI(TAG, "Brightness up pressed");
     change_brightness(1);
-    force_update();
+    // request_force_update();
 }
 
 void brightness_down_pressed(void *arg, void *usr_data)
 {
     ESP_LOGI(TAG, "Brightness down pressed");
     change_brightness(-1);
-    force_update();
+    // request_force_update();
 }
 
 void power_pressed(void *arg, void *usr_data)
@@ -152,17 +170,17 @@ void power_pressed(void *arg, void *usr_data)
     {
         overrideState = 1;
     }
-    force_update();
+    // request_force_update();
 }
 
 void power_double_pressed(void *arg, void *usr_data)
 {
     ESP_LOGI(TAG, "Power double");
     overrideState = 0;
-    force_update();
+    // request_force_update();
 }
 
-void setup_buttons(void)
+void button_task(void *param)
 {
     button_handle_t bright_up_bttn = NULL;
     ESP_ERROR_CHECK(iot_button_new_gpio_device(&brightness_up_btn_cfg, &brightness_up_btn_gpio_cfg, &bright_up_bttn));
@@ -176,6 +194,35 @@ void setup_buttons(void)
     ESP_ERROR_CHECK(iot_button_new_gpio_device(&power_btn_cfg, &power_btn_gpio_cfg, &power_bttn));
     iot_button_register_cb(power_bttn, BUTTON_SINGLE_CLICK, NULL, power_pressed, NULL);
     iot_button_register_cb(power_bttn, BUTTON_DOUBLE_CLICK, NULL, power_double_pressed, NULL);
+
+    // while (true)
+    // {
+    //     // if (iot_button_get_event(bright_up_bttn) == BUTTON_SINGLE_CLICK)
+    //     //     brightness_up_pressed();
+    //     // if (iot_button_get_event(bright_dn_bttn) == BUTTON_SINGLE_CLICK)
+    //     //     brightness_down_pressed();
+    //     // button_event_t power = iot_button_get_event(power_bttn);
+    //     // switch (power)
+    //     // {
+    //     // case BUTTON_SINGLE_CLICK:
+    //     //     power_pressed();
+    //     //     break;
+
+    //     // case BUTTON_DOUBLE_CLICK:
+    //     //     power_double_pressed();
+    //     //     break;
+    //     // default:
+    //     //     break;
+    //     // }
+
+    //     vTaskDelay(pdMS_TO_TICKS(20));
+    // }
+    vTaskDelete(NULL);
+}
+
+void update_request_handler(void* handler_arg, esp_event_base_t base, int32_t id, void* event_data) {
+    ESP_LOGI(TAG, "Manual update requested");
+    update_timer_callback(NULL);
 }
 
 void app_main(void)
@@ -184,9 +231,11 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
     init_train_manager();
+    ESP_ERROR_CHECK(esp_event_handler_register(CUSTOM_EVENTS, REQUEST_UPDATE_EVENT_ID, update_request_handler, NULL));
 
 #if TEST
-    while(true) {
+    while (true)
+    {
         clear_all_leds();
         clear_legend();
         sleep(1);
@@ -201,6 +250,7 @@ void app_main(void)
         .callback = &update_timer_callback,
         .name = "Train update"};
     esp_timer_handle_t update_timer_handler;
+    
     ESP_ERROR_CHECK(esp_timer_create(&led_timer_args, &update_timer_handler));
     ESP_ERROR_CHECK(esp_timer_start_periodic(update_timer_handler, UPDATE_PERIOD * 1000 * 1000));
 
@@ -212,7 +262,17 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_timer_create(&sync_timer_args, &sync_timer_handler));
     ESP_ERROR_CHECK(esp_timer_start_periodic(sync_timer_handler, TIME_SYNC_PERIOD * (uint64_t)(60 * 1000 * 1000)));
 
-    setup_buttons();
+    xTaskCreatePinnedToCore(
+        button_task,      // Function to implement the task
+        "Watch Buttons", // Name of the task
+        DEFAULT_THREAD_STACKSIZE,          // Stack size in words (or bytes depending on IDF version)
+        NULL,           // Task input parameter
+        1,              // Priority of the task
+        NULL,           // Task handle (can be NULL if not needed)
+        0               // Core to pin to (0 for PRO_CPU, 1 for APP_CPU)
+    );
+
+    // setup_buttons();
     force_update();
 
 #endif
