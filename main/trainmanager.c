@@ -134,7 +134,7 @@ void show_error_status(void)
     clear_all_leds();
     for (int i = 0; i < lgnd_data.num_leds; i++)
     {
-        ESP_ERROR_CHECK(led_strip_set_pixel(lgnd_strip, i, 120, 0, 0));
+        ESP_ERROR_CHECK(led_strip_set_pixel(lgnd_strip, i, SAFE_BRIGHTNESS(5), 0, 0));
     }
 
     ESP_ERROR_CHECK(led_strip_refresh(lgnd_strip));
