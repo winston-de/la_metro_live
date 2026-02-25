@@ -101,7 +101,7 @@ void update_timer_callback(void *param)
 
         cleared = false;
     }
-    else if (!cleared)
+    else
     {
         printf("Clearing\n");
         set_state(false);
